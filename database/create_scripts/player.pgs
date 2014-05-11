@@ -1,0 +1,11 @@
+create table player (
+	id serial,
+	screen_name varchar(50),
+	email_address varchar(300),
+	foursquare_id bigint,
+	created_on timestamp,
+	modified_on timestamp,
+	last_activity timestamp
+);
+
+grant all on player to cloudapp;
