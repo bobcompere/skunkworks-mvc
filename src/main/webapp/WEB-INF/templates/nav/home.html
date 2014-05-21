@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:tiles="http://www.thymeleaf.org">
+<head>
+<title>Landing Page</title>
+</head>
+
+<body tiles:fragment="content">
+
+<div class="contentFull">
+
+  <img th:src="@{/images/grrrr.png}" ></img>
+<h1>
+	Hello world!  
+</h1>
+
+<p th:text="'The time on the server is ' + ${time} +'-bam'">  The time on the server is ${serverTime}. </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:tiles="http://www.thymeleaf.org">
+
+<head tiles:substituteby="meta">
+<title>Four-Strategery</title>
+</head>
+
+<body >
+	<div id="header" tiles:include="header"></div>
+	<div class="content-wrapper-container">
+		<div class="content-wrapper">
+			
+			<div class="contentMain">
+				<div tiles:include="body">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
