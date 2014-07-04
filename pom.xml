@@ -7,6 +7,13 @@
 	<name>skunkworks-mvc</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
+	<repositories>
+		 <repository>
+   			 <id>foursquareapijava</id>
+    		<name>Foursquare V2 API for Java Repository</name>
+   			 <url>http://foursquare-api-java.googlecode.com/svn/repository</url>
+  		</repository>
+	</repositories>
 	<properties>
 		<java-version>1.7</java-version>
 		<spring-framework.version>3.2.4.RELEASE</spring-framework.version>
@@ -262,9 +269,18 @@
 		</dependency>
 		
 		
+		<dependency>
+		    <groupId>fi.foyt</groupId>
+		    <artifactId>foursquare-api</artifactId>
+		    <version>1.0.2</version>
+		</dependency>
 
-		
-		
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<version>1.0.0.RELEASE</version>
+		</dependency>
 	</dependencies>
     <build>
         <plugins>

@@ -11,8 +11,8 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="net.4strategery.cloud">
-		<level value="info" />
+	<logger name="net.fourstrategery.cloud">
+		<level value="debug" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
