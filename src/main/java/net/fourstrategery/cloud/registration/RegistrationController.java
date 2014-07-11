@@ -1,28 +1,32 @@
 package net.fourstrategery.cloud.registration;
 
-import java.util.ArrayList;
-import java.util.List;
+import net.fourstrategery.cloud.FourSquareApiFactory;
+import net.fourstrategery.cloud.entity.Player;
+import net.fourstrategery.cloud.repository.PlayerRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.client.RestTemplate;
+
+import fi.foyt.foursquare.api.FoursquareApi;
+import fi.foyt.foursquare.api.Result;
+import fi.foyt.foursquare.api.entities.CompleteUser;
+import fi.foyt.foursquare.api.entities.Contact;
 
 @Controller
 public class RegistrationController {
 
-	private final static String TOKEN_URL = "https://foursquare.com/oauth2/access_token?client_id=RATASDCULCIANGZIPPTBLCANVBISHWV2POUOTNQYDIJ1WDML"+
-			"&client_secret=3I4JYKTNUFVZB1Q1TLVGFEQXG2GIARZEJMADJRG2DN2Q1NYW" +
-			"&grant_type=authorization_code" +
-			"&redirect_uri=https://services-fourstrategery.rhcloud.com/cloud/reg/registrationRedirect.html" +
-			"&code=";
-	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	@Autowired
+	private PlayerRepository playerRepository;
+	
+	@Autowired
+	private FourSquareApiFactory fourSquareApiFactory;
 	
 	@RequestMapping(value = "/reg/registration", method = RequestMethod.GET)
 	public String registrationInit() {
@@ -34,20 +38,38 @@ public class RegistrationController {
 		
 		logger.debug("Got code [" + codeFrom4Sq + "]");
 		
-		RestTemplate restTemplate = new RestTemplate();
+		FoursquareApi api = fourSquareApiFactory.getInstance();
+		try {
+			api.authenticateCode(codeFrom4Sq);
+			
+			logger.debug("Got token [" + api.getOAuthToken() + "]");
+			
+			Result<CompleteUser> resultUser = api.user("self");
+			
+			CompleteUser user = resultUser.getResult();
+			
+			Player player = playerRepository.getPlayerByScreenName(user.getId());
+			
+			if (player == null) {
+				player = new Player();
+				player.setScreenName(user.getId());
+			}
+			
+			player.setFourSquareToken(api.getOAuthToken());
+			player.setEmailAddress(user.getContact().getEmail());
+			player.setLastName(user.getLastName());
+			player.setFirstName(user.getFirstName());
+			
+			player = playerRepository.save(player);
+			
+			logger.debug("Inserted new Player ID=" + player.getId());
+			
+			return "reg/registrationComplete";
+		}
 		
-		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
-		
-		messageConverters.add(new MappingJacksonHttpMessageConverter());
-		
-		restTemplate.setMessageConverters(messageConverters);
-		
-		String url = TOKEN_URL + codeFrom4Sq;
-		
-		AccessToken token = restTemplate.getForObject(url, AccessToken.class);
-		
-		logger.debug("Got token [" + token.getAccess_token() + "]");
-		
-		return "reg/registrationComplete";
+		catch (Exception e1) {
+			logger.error("registration failed",e1);
+			return "";
+		}
 	}
 }

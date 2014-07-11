@@ -1,6 +1,8 @@
 create table player (
 	id serial,
 	screen_name varchar(50),
+	first_name varchar(50),
+	last_name varchar(50),
 	email_address varchar(300),
 	foursquare_token varchar(100),
 	created_on timestamp,
