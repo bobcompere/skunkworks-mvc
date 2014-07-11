@@ -2,7 +2,7 @@ create table player (
 	id serial,
 	screen_name varchar(50),
 	email_address varchar(300),
-	foursquare_id bigint,
+	foursquare_token varchar(100),
 	created_on timestamp,
 	modified_on timestamp,
 	last_activity timestamp
