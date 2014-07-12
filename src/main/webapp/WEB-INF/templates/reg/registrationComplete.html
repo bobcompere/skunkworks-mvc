@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:tiles="http://www.thymeleaf.org">
+<head>
+<title></title>
+</head>
+
+<body tiles:fragment="content">
+
+<h1>Registration Complete</h1>
+
+<h2 th:text="'Welcome ' + ${user.firstName} + ' ' + ${user.lastName} + ' to 4Strategery!'"></h2>
+
+</body>
+</html>

@@ -8,6 +8,9 @@
 	<definition name="reg/registration" extends="oneColumnLayout">
 		<put-attribute name="body" value="/reg/registration :: content" />
 	</definition>
+	<definition name="reg/registrationComplete" extends="oneColumnLayout">
+		<put-attribute name="body" value="/reg/registrationComplete :: content" />
+	</definition>
 	
 	
 
