@@ -4,10 +4,14 @@ create table player (
 	first_name varchar(50),
 	last_name varchar(50),
 	email_address varchar(300),
+	foursquare_id varchar(30),
 	foursquare_token varchar(100),
 	created_on timestamp,
 	modified_on timestamp,
-	last_activity timestamp
+	last_activity timestamp,
+	primary key ("id")
 );
+
+create index player_fs_id on player(foursquare_id);
 
 grant all on player to cloudapp;

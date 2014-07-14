@@ -15,6 +15,10 @@ public class FourSquareApiFactory {
 	@Value("${CLIENTSECRET:3I4JYKTNUFVZB1Q1TLVGFEQXG2GIARZEJMADJRG2DN2Q1NYW}")
 	private String CLIENTSECRET;
 	
+	@Value("${PUSHSECRET:ROKTLFICRREYDPT5UZULJSABDVD20XZXODQDPWF4RM45P2A5}")
+	public String PUSHSECRET;
+	
+	
 	@Value("${REDIRECTURL:https://services-fourstrategery.rhcloud.com/cloud/reg/registrationRedirect.html}")
 	private String REDIRECTURL;
 	

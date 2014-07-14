@@ -1,0 +1,17 @@
+create table venue (
+id varchar(50),
+name varchar(200),
+address varchar(1000),
+city varchar(200),
+state varchar(20),
+postal_code varchar(30),
+country varchar(20),
+checkins int,
+users int,
+tips int,
+longitude numeric(16,14),
+latitude numeric(16,14),
+created_on timestamp,
+modified_on timestamp,
+primary key ("id")
+);

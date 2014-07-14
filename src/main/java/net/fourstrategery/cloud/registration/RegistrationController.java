@@ -1,7 +1,7 @@
 package net.fourstrategery.cloud.registration;
 
 import net.fourstrategery.cloud.FourSquareApiFactory;
-import net.fourstrategery.cloud.entity.Player;
+import net.fourstrategery.cloud.entity.PlayerEntity;
 import net.fourstrategery.cloud.repository.PlayerRepository;
 
 import org.slf4j.Logger;
@@ -47,10 +47,10 @@ public class RegistrationController {
 			
 			CompleteUser user = resultUser.getResult();
 			
-			Player player = playerRepository.getPlayerByScreenName(user.getId());
+			PlayerEntity player = playerRepository.getPlayerByScreenName(user.getId());
 			
 			if (player == null) {
-				player = new Player();
+				player = new PlayerEntity();
 				player.setScreenName(user.getId());
 			}
 			
@@ -58,6 +58,7 @@ public class RegistrationController {
 			player.setEmailAddress(user.getContact().getEmail());
 			player.setLastName(user.getLastName());
 			player.setFirstName(user.getFirstName());
+			player.setFourSquareId(user.getId());
 			
 			player = playerRepository.save(player);
 			

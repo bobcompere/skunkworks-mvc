@@ -24,6 +24,16 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	
+	<servlet>
+		<servlet-name>dumper</servlet-name>
+		<servlet-class>net.fourstrategery.cloud.DumpServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>dumper</servlet-name>
+		<url-pattern>/dumper</url-pattern>
+	</servlet-mapping>
 		
 	<servlet-mapping>
 		<servlet-name>fourstrat</servlet-name>

@@ -21,6 +21,9 @@
            	</beans:list>
     	 </beans:property>
 	</beans:bean>
+	
+	<beans:bean id="startupBean" class="net.fourstrategery.cloud.StartupBean">
+	</beans:bean>
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -157,8 +160,8 @@
 	
 	<beans:bean class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 		id="dataSource">
-		<beans:property value="${ds.driverClassName:org.hibernate.dialect.PostgreSQLDialect}" name="driverClassName" />
-		<beans:property value="${ds.url:jdbc:postgresql://127.0.0.1:5432/fourstrat}" name="url" />
+		<beans:property value="${ds.driverClassName:org.postgresql.Driver}" name="driverClassName" />
+		<beans:property value="${ds.url:jdbc:postgresql://${OPENSHIFT_POSTGRESQL_DB_HOST}:${OPENSHIFT_POSTGRESQL_DB_PORT}/fourstrat}" name="url" />
 		<beans:property value="${ds.username}" name="username" />
 		<beans:property value="${ds.password}" name="password" />
 	</beans:bean>

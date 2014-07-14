@@ -1,0 +1,16 @@
+create table checkin (
+	id varchar(40),
+	player_id int,
+	checkin_type varchar(20),
+	shout varchar(500),
+	user_id varchar(30),
+	venue_id varchar(50),
+	venue_name varchar(200),
+	venue_checkins_count int,
+	venue_users_count int,
+	created_on timestamp,
+	modified_on timestamp,
+	primary key("id")
+);
+
+create index checkin_venue on checkin(venue_id,id);
