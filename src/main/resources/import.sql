@@ -1,0 +1,1 @@
+insert into player (screen_name,first_name,last_name) values ('123','Joe','Dirt');

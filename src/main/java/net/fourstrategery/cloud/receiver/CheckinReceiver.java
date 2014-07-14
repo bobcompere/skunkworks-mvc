@@ -47,7 +47,7 @@ public class CheckinReceiver {
 	@Autowired
 	CheckinRepository checkinRepository;
 	
-	@Value("${CHECKIN_FOLDER:${OPENSHIFT_DATA_DIR}/checkins}")
+	@Value("${CHECKIN_FOLDER:${OPENSHIFT_DATA_DIR:c:/temp/fs}/checkins}")
 	String checkinsFolder;
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
