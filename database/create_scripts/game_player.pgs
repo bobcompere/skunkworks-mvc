@@ -1,0 +1,10 @@
+create table game_player (
+	game_id int,
+	player_id int,
+	created_on timestamp,
+	modified_on timestamp,
+	primary key(game_id,player_id)
+);
+
+create index player_game on game_player(player_id,game_id);
+

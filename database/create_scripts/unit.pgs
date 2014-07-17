@@ -1,0 +1,12 @@
+create table unit (     
+	id serial,
+	name varchar(100),
+	status int,
+	troops int,
+	location_id int,
+	next_move_time timestamp,
+	created_on timestamp,
+	modified_on timestamp,
+	primary key(id)
+);
+

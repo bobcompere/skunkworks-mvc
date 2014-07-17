@@ -1,0 +1,12 @@
+create table game_checkin (     
+	game_id int,
+	checkin_id varchar(40),
+	player_id int,
+	unit_id int,
+	troops_earned int,
+	unit_transaction_id int,
+	created_on timestamp,
+	modified_on timestamp,
+	primary key(game_id,checkin_id)
+);
+
