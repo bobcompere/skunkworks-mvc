@@ -28,7 +28,7 @@ public class UnitTransactionEntity extends BaseEntity {
 	private UnitEntity unit;
 	
 	@Column(name = "transaction_type")
-	private Integer transactionType;
+	private UnitTransactionType transactionType;
 	
 	@Column(name = "troop_change")
 	private Integer troopChange;
@@ -54,13 +54,6 @@ public class UnitTransactionEntity extends BaseEntity {
 		this.unit = unit;
 	}
 
-	public Integer getTransactionType() {
-		return transactionType;
-	}
-
-	public void setTransactionType(Integer transactionType) {
-		this.transactionType = transactionType;
-	}
 
 	public Integer getTroopChange() {
 		return troopChange;
@@ -76,6 +69,14 @@ public class UnitTransactionEntity extends BaseEntity {
 
 	public void setLocation(VenueEntity location) {
 		this.location = location;
+	}
+
+	public UnitTransactionType getTransactionType() {
+		return transactionType;
+	}
+
+	public void setTransactionType(UnitTransactionType transactionType) {
+		this.transactionType = transactionType;
 	}
 	
 	

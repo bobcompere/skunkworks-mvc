@@ -38,6 +38,11 @@ public class GameCheckinEntity extends BaseEntity {
 	@JoinColumn(name = "unit_id")
 	private UnitEntity unit;
 	
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "unit_transaction_id")
+	private UnitTransactionEntity unitTransaction;
+	
 	@Column(name="troops_earned")
 	private int troopsEarned;
 
@@ -79,6 +84,14 @@ public class GameCheckinEntity extends BaseEntity {
 
 	public void setTroopsEarned(int troopsEarned) {
 		this.troopsEarned = troopsEarned;
+	}
+
+	public UnitTransactionEntity getUnitTransaction() {
+		return unitTransaction;
+	}
+
+	public void setUnitTransaction(UnitTransactionEntity unitTransaction) {
+		this.unitTransaction = unitTransaction;
 	}
 	
 	

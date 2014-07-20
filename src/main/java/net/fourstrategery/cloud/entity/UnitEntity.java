@@ -28,7 +28,7 @@ public class UnitEntity extends BaseEntity {
 	private String name;
 	
 	@Column(name = "status")
-	private int status;
+	private UnitStatus status;
 	
 	@Column(name = "troops")
 	private int troops;
@@ -37,6 +37,16 @@ public class UnitEntity extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "location_id")
 	private VenueEntity location;
+	
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "game_id")
+	private GameEntity game;
+	
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "player_id")
+	private PlayerEntity player;
 	
 	@Column(name = "next_move_time")
 	private Date nextMoveTime;
@@ -57,11 +67,12 @@ public class UnitEntity extends BaseEntity {
 		this.name = name;
 	}
 
-	public int getStatus() {
+
+	public UnitStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(UnitStatus status) {
 		this.status = status;
 	}
 
@@ -87,6 +98,22 @@ public class UnitEntity extends BaseEntity {
 
 	public void setNextMoveTime(Date nextMoveTime) {
 		this.nextMoveTime = nextMoveTime;
+	}
+
+	public PlayerEntity getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(PlayerEntity player) {
+		this.player = player;
+	}
+
+	public GameEntity getGame() {
+		return game;
+	}
+
+	public void setGame(GameEntity game) {
+		this.game = game;
 	}
 	
 	

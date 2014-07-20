@@ -13,9 +13,6 @@ import net.fourstrategery.cloud.FourSquareApiFactory;
 import net.fourstrategery.cloud.entity.CheckinEntity;
 import net.fourstrategery.cloud.entity.PlayerEntity;
 import net.fourstrategery.cloud.entity.VenueEntity;
-import net.fourstrategery.cloud.repository.CheckinRepository;
-import net.fourstrategery.cloud.repository.PlayerRepository;
-import net.fourstrategery.cloud.repository.VenueRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,13 +36,8 @@ public class CheckinReceiver {
 	FourSquareApiFactory fourSquareApiFactory;
 	
 	@Autowired
-	PlayerRepository playerRepository;
+	CheckinProcessor checkinProcessor;
 	
-	@Autowired
-	VenueRepository venueRepository;
-	
-	@Autowired
-	CheckinRepository checkinRepository;
 	
 	@Value("${CHECKIN_FOLDER:${OPENSHIFT_DATA_DIR:c:/temp/fs}/checkins}")
 	String checkinsFolder;
@@ -68,70 +60,8 @@ public class CheckinReceiver {
 			try {
 				checkinObj = mapper.readValue(checkin, Checkin.class);
 				
-				//
-				// find player
-				//
-				PlayerEntity player = playerRepository.getPlayerByScreenName(checkinObj.getUser().getId());
-				//
-				// get checkin if exists
-				//
-				CheckinEntity checkinEnt = checkinRepository.findOne(checkinObj.getId());
-				//
-				// if not exists make a new one
-				//
-				if (checkinEnt == null) {
-					checkinEnt = new CheckinEntity();
-					checkinEnt.setId(checkinObj.getId());
-				}
-				//
-				// find venue if exists
-				//
-				VenueEntity venue = venueRepository.findOne(checkinObj.getVenue().getId());
-				//
-				// if not found create new
-				//
-				if (venue == null) {
-					venue = new VenueEntity();
-					venue.setId(checkinObj.getVenue().getId());
-				}
-				//
-				// Start filling in
-				//
-				venue.setName(checkinObj.getVenue().getName());
-				venue.setAddress(checkinObj.getVenue().getLocation().getAddress());
-				venue.setCity(checkinObj.getVenue().getLocation().getCity());
-				venue.setState(checkinObj.getVenue().getLocation().getState());
-				venue.setPostalCode(checkinObj.getVenue().getLocation().getPostalCode());
-				venue.setCountry(checkinObj.getVenue().getLocation().getCountry());
-				venue.setCheckins(checkinObj.getVenue().getStats().getCheckinsCount());
-				venue.setUsers(checkinObj.getVenue().getStats().getUsersCount());
-				venue.setLongitude(new BigDecimal(checkinObj.getVenue().getLocation().getLng()));
-				venue.setLatitude(new BigDecimal(checkinObj.getVenue().getLocation().getLat()));
+				checkinProcessor.processCheckin(checkinObj);
 				
-				checkinEnt.setCheckinType(checkinObj.getType());
-				if (player != null) checkinEnt.setPlayer(player);
-				checkinEnt.setShout(checkinObj.getShout());
-				checkinEnt.setUserId(checkinObj.getUser().getId());
-				checkinEnt.setVenueName(checkinObj.getVenue().getName());
-				checkinEnt.setCheckinsCount(checkinObj.getVenue().getStats().getCheckinsCount());
-				checkinEnt.setUsersCount(checkinObj.getVenue().getStats().getUsersCount());
-				//
-				// save the venue
-				//
-				venue = venueRepository.save(venue);
-				//
-				//
-				//
-				checkinEnt.setVenue(venue);
-				//
-				checkinRepository.save(checkinEnt);
-				//
-				if (player != null) {
-					player.setLastActivity(new Date());
-					playerRepository.save(player);
-				}
-				
-				logger.debug("CHECKIN LOGGED!!");
 			}
 			catch (Exception e1) {
 				logger.error("Error processing checkin : ",e1);

@@ -1,12 +1,15 @@
 create table unit (     
 	id serial,
+	game_id int,
+	player_id int,
 	name varchar(100),
 	status int,
 	troops int,
-	location_id int,
+	location_id varchar(50),
 	next_move_time timestamp,
 	created_on timestamp,
 	modified_on timestamp,
 	primary key(id)
 );
 
+create index unit_game on unit(game_id,id);

@@ -3,7 +3,7 @@ create table unit_transaction (
 	unit_id int,
 	transaction_type int,
 	troop_change int,
-	location_id int, 
+	location_id varchar(50), 
 	created_on timestamp,
 	modified_on timestamp,
 	primary key(id)
