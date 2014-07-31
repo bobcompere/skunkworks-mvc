@@ -47,11 +47,11 @@ public class RegistrationController {
 			
 			CompleteUser user = resultUser.getResult();
 			
-			PlayerEntity player = playerRepository.getPlayerByScreenName(user.getId());
+			PlayerEntity player = playerRepository.getPlayerByfourSquareId(user.getId());
 			
 			if (player == null) {
 				player = new PlayerEntity();
-				player.setScreenName(user.getId());
+				player.setFourSquareId(user.getId());
 			}
 			
 			player.setFourSquareToken(api.getOAuthToken());
@@ -59,7 +59,7 @@ public class RegistrationController {
 			player.setLastName(user.getLastName());
 			player.setFirstName(user.getFirstName());
 			player.setFourSquareId(user.getId());
-			
+			player.setScreenName(user.getId());
 			player = playerRepository.save(player);
 			
 			model.addAttribute("user", player);

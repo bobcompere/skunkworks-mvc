@@ -1,6 +1,7 @@
 create table player (
 	id serial,
 	screen_name varchar(50),
+	password varchar(100),
 	first_name varchar(50),
 	last_name varchar(50),
 	email_address varchar(300),

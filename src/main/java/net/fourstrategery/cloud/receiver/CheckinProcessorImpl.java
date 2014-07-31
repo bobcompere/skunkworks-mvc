@@ -69,7 +69,7 @@ public class CheckinProcessorImpl implements CheckinProcessor {
 		//
 		// find player
 		//
-		PlayerEntity player = playerRepository.getPlayerByScreenName(checkinObj.getUser().getId());
+		PlayerEntity player = playerRepository.getPlayerByfourSquareId(checkinObj.getUser().getId());
 		//
 		// get checkin if exists
 		//

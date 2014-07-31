@@ -42,9 +42,14 @@ public class PlayerEntity extends BaseEntity implements Serializable {
 	@Column(name = "last_activity")
 	private Date lastActivity;
 	
+	@Column(name = "password")
+	public String password;
+
+	
 	public String getFourSquareId() {
 		return fourSquareId;
 	}
+	
 
 	public void setFourSquareId(String fourSquareId) {
 		this.fourSquareId = fourSquareId;
@@ -107,6 +112,16 @@ public class PlayerEntity extends BaseEntity implements Serializable {
 
 	public void setLastActivity(Date lastActivity) {
 		this.lastActivity = lastActivity;
+	}
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	

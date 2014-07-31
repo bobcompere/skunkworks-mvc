@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:tiles="http://www.thymeleaf.org">
+<head>
+<title></title>
+</head>
+
+<body tiles:fragment="content">
+
+<form th:action="@{../j_spring_security_check}" method="post"
+							action="#" name="loginform">
+<div>
+	Screen Name <input type="text" name="username"/><br/>
+	Password <input type="password" name="password" />  
+</div>
+<input type="submit" name="Login"/>
+</form>
+
+</body>
+</html>
