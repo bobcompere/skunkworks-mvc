@@ -57,4 +57,12 @@ public class PlayerUserDetails extends User implements UserDetails {
 		return true;
 	}
 
+	public PlayerEntity getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(PlayerEntity player) {
+		this.player = player;
+	}
+
 }

@@ -1,0 +1,28 @@
+ .left-nav {
+ 	float:left;
+ 	 width:10%;
+ }
+ 
+ .main-content {
+ 	float:left;
+ 	 width:90%;
+ }
+ 
+ .table-main {
+ 		border-color: black;
+ 		border-width: 2px;
+ 		border-style: solid;
+ }
+ 
+ th.table-main {
+ 	font-weight: bolder;
+ 	background-color: aqua;
+ 	border-style: solid;
+ 	border-width: 1px;
+ }
+ 
+  td.table-main {
+ 	border-style: solid;
+ 	border-width: 1px;
+ }
+ 

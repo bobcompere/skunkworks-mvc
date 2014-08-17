@@ -8,15 +8,25 @@
 
 <body tiles:fragment="content">
 
-<h1 th:text="${company}"></h1>
-<div class="contentFull">
+<h1>Active Games</h1>
+<table class="table-main">
+	<tr>
+		<th class="table-main">Game Name</th>
+		<th class="table-main">Game Start</th>
+		<th class="table-main">Game End</th>
+		<th class="table-main">Players</th>
+	</tr>
+	<tr th:if="${games.empty}">
+		<td class="table-main">No Active Games</td>
+	</tr>
+	<tr th:each="game : ${games}">
+		<td class="table-main"><a th:text="${game.description}" th:href="@{/nav/gameStatus.html?gameID=} + @{game.id}"></a></td>
+		<td th:text="${game.starts}" class="table-main"></td>
+		<td th:text="${game.ends}" class="table-main"></td>
+		<td th:text="${game.players.size()}" class="table-main"></td>
+	</tr>
+</table>
 
-  <img th:src="@{/images/grrrr.png}" ></img>
-<h1>
-	Hello world!  
-</h1>
 
-<p th:text="'The time on the server is ' + ${time} +'-bam'">  The time on the server is ${serverTime}. </p>
-</div>
 </body>
 </html>

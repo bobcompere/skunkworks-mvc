@@ -5,17 +5,18 @@
 
 <head tiles:substituteby="meta">
 <title>Four-Strategery</title>
+	
 </head>
 
 <body >
 	<div id="header" tiles:include="header"></div>
 	<div class="content-wrapper-container">
-		<div class="content-wrapper">
-			
-			<div class="contentMain">
-				<div tiles:include="body">
+		<div class="left-nav">
+				<a th:href="@{/profile/edit.html}">Profile Edit</a><br/>
+		</div>
+		<div class="main-content">
+			<div tiles:include="body">
 					
-				</div>
 			</div>
 		</div>
 	</div>

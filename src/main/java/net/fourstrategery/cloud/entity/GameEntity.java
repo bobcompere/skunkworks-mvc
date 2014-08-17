@@ -2,6 +2,7 @@
 package net.fourstrategery.cloud.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -40,6 +42,10 @@ public class GameEntity extends BaseEntity {
 	
 	@Column(name = "ends")
 	private Date ends;
+	
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "game_id")
+	List<GamePlayerEntity> players;
 
 	public int getId() {
 		return id;
@@ -84,7 +90,16 @@ public class GameEntity extends BaseEntity {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
+	public List<GamePlayerEntity> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(List<GamePlayerEntity> players) {
+		this.players = players;
+	}
+
+
 	
 	
 }

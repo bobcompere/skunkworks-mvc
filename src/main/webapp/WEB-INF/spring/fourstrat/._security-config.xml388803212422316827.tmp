@@ -17,7 +17,6 @@
 
     <intercept-url pattern="/auth/**" access="permitAll" />
     <intercept-url pattern="/registration/**" access="permitAll" />
-     <intercept-url pattern="/receiver/**" access="permitAll" />
     <intercept-url pattern="/**" access="hasRole('ROLE_BaseUser')" />
  
     <form-login password-parameter="password" username-parameter="username" login-page="/auth/login.html" authentication-failure-url="/auth/loginfailed.html"

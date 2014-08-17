@@ -27,6 +27,7 @@ public class UnitNameGeneratorImpl implements UnitNameGenerator{
 			name = vname + " " + ithize(regNumber) + " Regiment";
 			UnitEntity unit = unitRepository.findUnitByNameAndGame(game, name);
 			if (unit == null) break;
+			regNumber++;
 		}
 		return name;
 	}

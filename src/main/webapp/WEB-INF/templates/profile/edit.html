@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:tiles="http://www.thymeleaf.org">
+<head>
+<title></title>
+</head>
+
+<body tiles:fragment="content">
+
+<form th:action="@{/profile/edit.html}" method="post"
+			 name="profileEdit" th:object="${playerEditModel}">
+<div>
+	<div class="alert alert-warning alert-danger" th:if="${#fields.hasErrors('*')}">
+		<ul id="errorList" th:if="${#fields.hasErrors('*')}">
+		<li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+		</ul>
+	</div>
+	<table>
+		<tr><td><h2>Screen Name</h2></td><td><input type="text" th:field="*{screenName}"/></td></tr>
+		<tr><td><h2>Player Name</h2></td><td><span th:text="*{firstName} + ' ' + *{lastName}"/></td></tr>
+		<tr><td><h2>New Password</h2></td><td><input type="password" th:field="*{passwordChange1}"/></td></tr>
+		<tr><td><h2>New Password (double Check)</h2></td><td><input type="password" th:field="*{passwordChange2}"/></td></tr>
+	</table>
+</div>
+<input type="submit" name="Login"/>
+</form>
+
+</body>
+</html>
