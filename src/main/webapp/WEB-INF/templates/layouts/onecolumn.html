@@ -5,16 +5,18 @@
 
 <head tiles:substituteby="meta">
 <title>Four-Strategery</title>
-	
+	 <link rel="icon" type="image/png" th:src="@{/images/favicon.png}" />
 </head>
 
-<body >
+<body class="ui-widget">
 	<div id="header" tiles:include="header"></div>
-	<div class="content-wrapper-container">
-		<div class="left-nav">
+	<div class="ui-widget-content">
+		<div class="ui-widget-header left-nav">
 				<a th:href="@{/profile/edit.html}">Profile Edit</a><br/>
+				<hr/>
+				<a th:href="@{/auth/logout.html}">Logout</a>
 		</div>
-		<div class="main-content">
+		<div class="ui-widget-content main-content">
 			<div tiles:include="body">
 					
 			</div>

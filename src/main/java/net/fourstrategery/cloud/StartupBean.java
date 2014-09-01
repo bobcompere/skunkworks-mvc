@@ -9,7 +9,10 @@ import net.fourstrategery.cloud.entity.PlayerEntity;
 import net.fourstrategery.cloud.repository.PlayerRepository;
 import net.fourstrategery.cloud.security.FsPasswordEncoder;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -26,6 +29,11 @@ public class StartupBean implements ApplicationListener<ContextRefreshedEvent> {
 	@Autowired
 	FsPasswordEncoder passwordEncoder;
 	
+	@Value("${fourStrat.sendStartupEmail:TRUE}")
+	private String sendStartEmails;
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	 @Override
 	 public void onApplicationEvent(final ContextRefreshedEvent event) {
 		 
@@ -41,12 +49,17 @@ public class StartupBean implements ApplicationListener<ContextRefreshedEvent> {
 		 //
 		 //
 		 //
-		MailInfo info = new MailInfo();
-		
-		info.setToAddresses("bcompere@gmail.com");
-		info.setSubject("Four Strategery - services initializing");
-		info.setMessageBody("Starting up " + new Date() + "......");
-		
-		mailService.sendMail(info);
+		 if (sendStartEmails.equalsIgnoreCase("TRUE")) {
+			MailInfo info = new MailInfo();
+			
+			info.setToAddresses("bcompere@gmail.com");
+			info.setSubject("Four Strategery - services initializing");
+			info.setMessageBody("Starting up " + new Date() + "......");
+			
+			mailService.sendMail(info);
+		 }
+		 else {
+			 logger.info("Startup emails are disabled");
+		 }
 	}
 }

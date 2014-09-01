@@ -2,5 +2,7 @@ package net.fourstrategery.cloud.entity;
 
 public enum UnitStatus {
 	GARRISONED,
-	INTRANSIT
+	INTRANSIT,
+	DESTROYED,
+	ABSORBED
 }

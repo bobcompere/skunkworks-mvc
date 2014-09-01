@@ -20,7 +20,7 @@
 		<td class="table-main">No Active Games</td>
 	</tr>
 	<tr th:each="game : ${games}">
-		<td class="table-main"><a th:text="${game.description}" th:href="@{/nav/gameStatus.html?gameID=} + @{game.id}"></a></td>
+		<td class="table-main"><a th:text="${game.description}" th:href="@{/nav/gameStatus.html?gameId=} + ${game.id}"></a></td>
 		<td th:text="${game.starts}" class="table-main"></td>
 		<td th:text="${game.ends}" class="table-main"></td>
 		<td th:text="${game.players.size()}" class="table-main"></td>

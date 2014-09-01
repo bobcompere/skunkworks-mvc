@@ -1,11 +1,15 @@
  .left-nav {
  	float:left;
  	 width:10%;
+ 	 height:1200px;
+ 	 padding: 5px;
  }
  
  .main-content {
  	float:left;
- 	 width:90%;
+ 	 width:88%;
+ 	  height:1200px;
+ 	  padding : 5px;
  }
  
  .table-main {
@@ -14,9 +18,20 @@
  		border-style: solid;
  }
  
+ .stripe {
+ 	background-color: maroon;
+ }
+ 
  th.table-main {
  	font-weight: bolder;
- 	background-color: aqua;
+ 	background-color: #A9BCF5;
+ 	border-style: solid;
+ 	border-width: 1px;
+ }
+ 
+  th.table-main-your {
+ 	font-weight: bolder;
+ 	background-color: #00FF80;
  	border-style: solid;
  	border-width: 1px;
  }
@@ -24,5 +39,52 @@
   td.table-main {
  	border-style: solid;
  	border-width: 1px;
+ }
+ 
+ .player_0 {
+ 	background-color: #F781F3;
+ 	border-style: solid;
+ 	border-width: 1px;
+ }
+ 
+  .player_1 {
+ 	background-color: #FFBF00;
+ 	border-style: solid;
+ 	border-width: 1px;
+ }
+ 
+   .player_2	 {
+ 	background-color: #F3F781;
+ 	border-style: solid;
+ 	border-width: 1px;
+ }
+ 
+  .player_3	 {
+ 	background-color: #01A9DB;
+ 	border-style: solid;
+ 	border-width: 1px;
+ }
+ 
+ .player_4	 {
+ 	background-color: #A4A4A4;
+ 	border-style: solid;
+ 	border-width: 1px;
+ }
+ 
+ .vert-text {
+ 	/* Safari */
+-webkit-transform: rotate(-90deg);
+
+/* Firefox */
+-moz-transform: rotate(-90deg);
+
+/* IE */
+-ms-transform: rotate(-90deg);
+
+/* Opera */
+-o-transform: rotate(-90deg);
+
+/* Internet Explorer */
+filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
  }
  

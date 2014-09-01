@@ -11,6 +11,7 @@
       <intercept-url pattern="/css/**" access="permitAll" />
     <intercept-url pattern="/js/**" access="permitAll" />
     <intercept-url pattern="/img/**" access="permitAll" />
+    <intercept-url pattern="/images/**" access="permitAll" />
     <intercept-url pattern="/theme/**" access="permitAll" />
     <intercept-url pattern="/resources/**" access="permitAll" />
     <intercept-url pattern="/pos/**" access="permitAll" />
@@ -20,8 +21,8 @@
      <intercept-url pattern="/receiver/**" access="permitAll" />
     <intercept-url pattern="/**" access="hasRole('ROLE_BaseUser')" />
  
-    <form-login password-parameter="password" username-parameter="username" login-page="/auth/login.html" authentication-failure-url="/auth/loginfailed.html"
-      default-target-url="/dashboard/maindashboard.html" />
+    <form-login password-parameter="password" username-parameter="username" login-page="/auth/login.html" authentication-failure-url="/auth/login.html"
+      default-target-url="/nav/home.html" />
     <logout logout-url="/auth/logout.html" logout-success-url="/auth/login.html" />
   </http>
 

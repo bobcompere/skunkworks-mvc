@@ -1,6 +1,7 @@
 package net.fourstrategery.cloud.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -50,6 +52,9 @@ public class UnitEntity extends BaseEntity {
 	
 	@Column(name = "next_move_time")
 	private Date nextMoveTime;
+	
+	@Transient
+	private List<String> moveMethods;
 
 	public Integer getId() {
 		return id;
@@ -114,6 +119,14 @@ public class UnitEntity extends BaseEntity {
 
 	public void setGame(GameEntity game) {
 		this.game = game;
+	}
+
+	public List<String> getMoveMethods() {
+		return moveMethods;
+	}
+
+	public void setMoveMethods(List<String> moveMethods) {
+		this.moveMethods = moveMethods;
 	}
 	
 	

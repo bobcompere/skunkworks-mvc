@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:tiles="http://www.thymeleaf.org">
+<head>
+<title></title>
+</head>
+
+<body tiles:fragment="content">
+
+<h1 th:text="${gameModel.game.description}">GAME</h1>
+
+<h1>Players</h1>
+
+<table class="table-main">
+	<tr>
+		<th class="table-main" colspan="3">Players</th>
+	</tr>
+	<tr th:each="player : ${gameModel.players}" class="table-main">
+		<td  th:class="'player_' + ${player.playerNumber}" th:text="${player.player.screenName}"></td>
+		<td  th:class="'player_' + ${player.playerNumber}" th:text="${player.player.firstName}"></td>
+		<td  th:class="'player_' + ${player.playerNumber}" th:text="${player.player.lastName}"></td>
+	</tr>
+</table>
+
+<h1>Make some moves?</h1>
+
+<table class="table-main">
+	<tr>
+		<th class="table-main-your" th:colspan="4">Your Units</th>
+		<th class="table-main" th:colspan="${gameModel.venueCount}">Move your troops</th>
+	</tr>
+	<tr>
+		<th class="table-main-your">Unit Name</th>
+		<th class="table-main-your">Strength</th>
+		<th class="table-main-your">Status</th>
+		<th class="table-main-your">Location</th>
+		<th th:each="venue : ${gameModel.venues}" class="table-main">
+			<span th:text="${venue.name} + ', ' + ${venue.city}" ></span>
+		</th>
+	</tr>
+	<tr th:if="${gameModel.myUnits.empty}">
+		<td class="table-main">No Units</td>
+	</tr>
+	<tr th:each="unit : ${gameModel.myUnits}">
+		<td th:text="${unit.name}" class="table-main"></td>
+		<td th:text="${unit.troops}" class="table-main"></td>
+		<td th:text="${unit.status}" class="table-main"></td>
+		<td th:text="${unit.location.name}" class="table-main"></td>
+		<td th:each="venue,venueCnt : ${gameModel.venues}"  th:class="'player_' + ${venue.currentUnitPlayerNumber}">
+			<div th:if="${venue.currentUnit} != null"  th:onclick="${unit.moveMethods[__${venueCnt.index}__]}">
+				<span th:text="${venue.currentUnit.name}"></span>
+			</div>
+			<div th:if="${venue.currentUnit} == null" th:onclick="${unit.moveMethods[__${venueCnt.index}__]}">
+				<span>un-occupied</span>
+			</div>
+		</td>
+	</tr>
+</table>
+
+<h1>Venues and Moves</h1>
+
+<table class="table-main">
+</table>
+
+<h1>Move Distances</h1>
+
+<table class="table-main">
+	<tr>
+		<th class="table-main"><image th:src="@{/images/club.jpg}" width="60px" /></th>
+		<th th:each="venue : ${gameModel.venues}" class="table-main">
+			<span th:text="${venue.name} + ', ' + ${venue.city}" ></span>
+		</th>
+	</tr>
+	<tr th:each="venue : ${gameModel.venues}">
+		<th th:text="${venue.name} + ', ' + ${venue.city} + ' ' + ${venue.state}"  class="table-main"></th>
+		<td th:each="dist : ${venue.distances}" class="table-main">
+			<p th:if="${dist} != 0"><span th:text="${dist}"></span></p>
+			<p th:if="${dist} == 0"><image th:src="@{/images/diamond.jpg}" width="60px" /></p>
+		</td>
+	</tr>
+		
+	
+	
+</table>
+
+<div hidden="true">
+<form th:action="@{/nav/moveUnit.html}" method="post"
+			 name="moveunit">
+	<input type="hidden" name="unit"/>
+	<input type="hidden" name="location"/>
+</form>
+</div>
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+       $(document).ready(function(){  
+      	 message( /*[[${message} ]]*/
+    		   );
+       });
+       
+ /*]]>*/
+</script>
+
+<script>
+
+function moveUnit(unitId,locationId,message) {
+	$('<div></div>').dialog({
+        modal: true,
+        title :'Confirm Move',
+        open: function() {
+          var markup = message;
+          $(this).html(markup);
+        },
+        buttons: {
+            "GO": function() {
+              $( this ).dialog( "close" );
+              document.forms["moveunit"]["unit"].value=unitId;
+              document.forms["moveunit"]["location"].value=locationId;
+              document.forms["moveunit"].submit();
+            }	,
+            Cancel: function() {
+              $( this ).dialog( "close" );
+            }
+        }
+      });  //end confirm dialog
+}
+
+function message(message) {
+	$('<div></div>').dialog({
+        modal: true,
+        title :'Message',
+        open: function() {
+          var markup = message;
+          $(this).html(markup);
+        },
+        buttons: {
+            "OK": function() {
+              $( this ).dialog( "close" );
+            }	,
+        }
+      });  //end confirm dialog
+}
+
+
+function doDialog(title_str,message) {
+	$('<div></div>').dialog({
+        modal: true,
+        title : title_str,
+        open: function() {
+          var markup = message;
+          $(this).html(markup);
+        },
+        buttons: {
+          Ok: function() {
+            $( this ).dialog( "close" );
+          }
+        }
+      });  //end confirm dialog
+}
+
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+CREATE OR REPLACE VIEW game_venues_view AS 
+ SELECT DISTINCT gc.game_id,
+    ci.venue_id,
+    v.name,
+    v.city,
+    v.state
+   FROM game_checkin gc,
+    checkin ci,
+    venue v
+  WHERE ci.id::text = gc.checkin_id::text AND ci.venue_id::text = v.id::text;
+  
+  grant all on game_venues_view to adminp9ngusl;

@@ -9,6 +9,10 @@
 		<put-attribute name="body" value="/nav/home :: content" />
 	</definition>
 	
+	<definition name="nav/gameStatus" extends="oneColumnLayout">
+		<put-attribute name="body" value="/nav/gameStatus :: content" />
+	</definition>
+	
 	
 
 </tiles-definitions>
