@@ -41,8 +41,17 @@
  	border-width: 1px;
  }
  
+ .activities {
+   overflow: auto;
+   height: 300px;
+}
+
+.secret-activity {
+	background-color:#F5A9BC;
+}
+ 
  .player_0 {
- 	background-color: #F781F3;
+ 	background-color: #F5ECCE;
  	border-style: solid;
  	border-width: 1px;
  }

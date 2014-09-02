@@ -10,19 +10,45 @@
 
 <h1 th:text="${gameModel.game.description}">GAME</h1>
 
+<table>
+<tr>
+<td valign="top">
 <h1>Players</h1>
 
 <table class="table-main">
 	<tr>
 		<th class="table-main" colspan="3">Players</th>
+		<th class="table-main">Active Units</th>
 	</tr>
 	<tr th:each="player : ${gameModel.players}" class="table-main">
 		<td  th:class="'player_' + ${player.playerNumber}" th:text="${player.player.screenName}"></td>
 		<td  th:class="'player_' + ${player.playerNumber}" th:text="${player.player.firstName}"></td>
 		<td  th:class="'player_' + ${player.playerNumber}" th:text="${player.player.lastName}"></td>
+		<td  th:class="'player_' + ${player.playerNumber}" th:text="${player.activeUnitCount}"></td>
 	</tr>
 </table>
+</td>
+<td>
 
+<h1>Game Activities</h1>
+<div class="activities">
+<table class="table-main">
+<tr>
+	<th class="table-main">When?</th><th class="table-main">What?</th>
+</tr>
+<tr th:each="activity : ${gameModel.activities}">
+	<td th:if="${activity.specificAudience} == null" th:text="${activity.createdOn}" class="table-main"></td>
+	<td th:if="${activity.specificAudience} != null" th:text="${activity.createdOn}" class="table-main secret-activity"></td>
+	<td th:if="${activity.specificAudience} == null" th:text="${activity.message}" class="table-main"></td>
+	<td th:if="${activity.specificAudience} != null" th:text="${activity.message}" class="table-main secret-activity"></td>
+</tr>
+
+
+</table>
+</div>
+</td>
+</tr>
+</table>
 <h1>Make some moves?</h1>
 
 <table class="table-main">
@@ -127,6 +153,7 @@ function moveUnit(unitId,locationId,message) {
 }
 
 function message(message) {
+	if (message.length == 0) return;
 	$('<div></div>').dialog({
         modal: true,
         title :'Message',

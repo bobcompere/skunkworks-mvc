@@ -1,0 +1,13 @@
+create table activity (     
+	id serial,
+	game_id int,
+	specific_audience_player_id int,
+	message varchar(10000),
+	created_on timestamp,
+	modified_on timestamp,
+	primary key(id)
+);
+
+  grant all on activity to adminp9ngusl;
+  
+    grant all on activity_id_seq to adminp9ngusl;

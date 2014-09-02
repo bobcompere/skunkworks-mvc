@@ -9,6 +9,7 @@ import net.fourstrategery.cloud.entity.GameVenueEntity;
 import net.fourstrategery.cloud.entity.PlayerEntity;
 import net.fourstrategery.cloud.entity.UnitEntity;
 import net.fourstrategery.cloud.entity.meta.GameStatusModel;
+import net.fourstrategery.cloud.repository.ActivityRepository;
 import net.fourstrategery.cloud.repository.GamePlayerRepository;
 import net.fourstrategery.cloud.repository.GameRepository;
 import net.fourstrategery.cloud.repository.GameVenueRepository;
@@ -43,6 +44,9 @@ public class GameStatusController {
 	
 	@Autowired
 	PlayerAuthDetalService playerAuthDetalService;
+	
+	@Autowired
+	ActivityRepository activityRepository;
 
 	@ModelAttribute("gameModel")
 	GameStatusModel getModel(@RequestParam int gameId) {
@@ -57,11 +61,13 @@ public class GameStatusController {
 		GameEntity game = gameRepository.findOne(gameId);
 		returnVal.setGame(game);
 		
+		returnVal.setActivities(activityRepository.getActivitiesForGameAndPlayer(game, player));
+		
 		List<GamePlayerEntity> players = gamePlayerRepository.getPlayersForGame(game);
 		
 		returnVal.setPlayers(players);
 		
-		int playerNum = 0;
+		int playerNum = 1;
 		for (GamePlayerEntity playerX : players) {
 			playerX.setPlayerNumber(playerNum);
 			if (playerX.getPlayer().getId() == player.getId()) {
@@ -86,10 +92,11 @@ public class GameStatusController {
 				if (VenueUtility.isInVenue(unit, venues.get(i1).getVenue())) {
 					venues.get(i1).setCurrentUnit(unit);
 					
-					playerNum = 0;
+					playerNum = 1;
 					for (GamePlayerEntity playerX : players) {
 						if (playerX.getPlayer().getId() == unit.getPlayer().getId()) {
 							venues.get(i1).setCurrentUnitPlayerNumber(playerNum);
+							playerX.setActiveUnitCount(playerX.getActiveUnitCount() + 1);
 							break;
 						}
 						playerNum++;

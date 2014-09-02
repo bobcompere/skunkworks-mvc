@@ -10,10 +10,13 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "EEE MMM dd yyyy HH:mm:ss")
 	@Column(name = "created_on")
 	protected Date createdOn;
 	

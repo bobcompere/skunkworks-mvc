@@ -30,6 +30,9 @@ public class GamePlayerEntity extends BaseEntity {
 	
 	@Transient
 	int playerNumber;
+	
+	@Transient
+	int activeUnitCount;
 
 	public GameEntity getGame() {
 		return game;
@@ -53,5 +56,13 @@ public class GamePlayerEntity extends BaseEntity {
 
 	public void setPlayerNumber(int playerNumber) {
 		this.playerNumber = playerNumber;
+	}
+
+	public int getActiveUnitCount() {
+		return activeUnitCount;
+	}
+
+	public void setActiveUnitCount(int activeUnitCount) {
+		this.activeUnitCount = activeUnitCount;
 	}
 }

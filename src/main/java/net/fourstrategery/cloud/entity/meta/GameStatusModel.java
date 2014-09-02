@@ -2,6 +2,7 @@ package net.fourstrategery.cloud.entity.meta;
 
 import java.util.List;
 
+import net.fourstrategery.cloud.entity.ActivityEntity;
 import net.fourstrategery.cloud.entity.GameEntity;
 import net.fourstrategery.cloud.entity.GamePlayerEntity;
 import net.fourstrategery.cloud.entity.GameVenueEntity;
@@ -15,6 +16,7 @@ public class GameStatusModel {
 	private int venueCount;
 	private int myPlayerNumber;
 	private List<GamePlayerEntity> players;
+	private List<ActivityEntity> activities;
 
 	public List<UnitEntity> getMyUnits() {
 		return myUnits;
@@ -62,6 +64,14 @@ public class GameStatusModel {
 
 	public void setPlayers(List<GamePlayerEntity> players) {
 		this.players = players;
+	}
+
+	public List<ActivityEntity> getActivities() {
+		return activities;
+	}
+
+	public void setActivities(List<ActivityEntity> activities) {
+		this.activities = activities;
 	}
 
 

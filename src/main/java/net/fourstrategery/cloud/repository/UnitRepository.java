@@ -20,10 +20,16 @@ public interface UnitRepository extends JpaRepository<UnitEntity, Integer> {
 	public UnitEntity findUnitByNameAndGame(GameEntity game, String name);
 	
 	@Query("Select u from UnitEntity u where u.status in (net.fourstrategery.cloud.entity.UnitStatus.GARRISONED, "
-			+ "net.fourstrategery.cloud.entity.UnitStatus.INTRANSIT) and u.game.id = ?2 and u.player.id = ?1")
+			+ "net.fourstrategery.cloud.entity.UnitStatus.INTRANSIT) and u.game.id = ?2 and u.player.id = ?1 order by u.createdOn")
 	public List<UnitEntity> getCurrentUnitsForPlayerAndGame(int player_id,int game_id);
 	
 	@Query("Select u from UnitEntity u where u.status in (net.fourstrategery.cloud.entity.UnitStatus.GARRISONED, "
 			+ "net.fourstrategery.cloud.entity.UnitStatus.INTRANSIT) and u.game.id = ?1")
 	public List<UnitEntity> getCurrentUnitsForGame(int game_id);
+	
+	@Query("Select u from UnitEntity u where u.status = net.fourstrategery.cloud.entity.UnitStatus.INTRANSIT and u.nextMoveTime < CURRENT_TIMESTAMP order by u.nextMoveTime")
+	public List<UnitEntity> getUnitsThatHaveArrived();
+	
+	@Query("Select u from UnitEntity u where u.status =  net.fourstrategery.cloud.entity.UnitStatus.GARRISONED and u.game = ?1 and u.location=?2")
+	public UnitEntity getUnitOccupingVenue(GameEntity game, VenueEntity venue);
 }

@@ -15,6 +15,7 @@ import net.fourstrategery.cloud.entity.UnitStatus;
 import net.fourstrategery.cloud.entity.UnitTransactionEntity;
 import net.fourstrategery.cloud.entity.UnitTransactionType;
 import net.fourstrategery.cloud.entity.VenueEntity;
+import net.fourstrategery.cloud.gameplay.ActivityService;
 import net.fourstrategery.cloud.repository.CheckinRepository;
 import net.fourstrategery.cloud.repository.GameCheckinRepository;
 import net.fourstrategery.cloud.repository.GameRepository;
@@ -59,6 +60,9 @@ public class CheckinProcessorImpl implements CheckinProcessor {
 	
 	@Autowired
 	UnitRepository unitRepository;
+	
+	@Autowired
+	ActivityService activityService;
 	
 	@Autowired
 	MailService mailService;
@@ -211,6 +215,8 @@ public class CheckinProcessorImpl implements CheckinProcessor {
 		else {
 			unitNote = " Was created, initial force level = " + unitTransaction.getTroopChange();
 		}
+		
+		activityService.newUnit(unit);
 		
 		mailInfo.setToAddresses(player.getEmailAddress());
 		mailInfo.setSubject("Game On! - your checkin at " + venue.getName() + " has been credited to game " + game.getDescription());
