@@ -8,7 +8,7 @@
 
 <body tiles:fragment="content">
 
-<h1 th:text="${gameModel.game.description}">GAME</h1>
+<a th:href="@{/nav/gameStatus.html?gameId=} + ${gameModel.game.id}"><h1 th:text="${gameModel.game.description}">GAME</h1></a>
 
 <table>
 <tr>
