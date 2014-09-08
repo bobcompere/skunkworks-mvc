@@ -87,7 +87,7 @@ public class GameControlAndScoringServiceImpl implements
 				gamePlayerRepository.save(gamePlayer);
 				
 				activityService.simpleGameActivity(game, "Venue Occuppation Points Awarded to " +
-						gamePlayer.getPlayer().getScreenName() + "Total points: " + adder.addToScore + " details:" +
+						gamePlayer.getPlayer().getScreenName() + ". Total points: " + adder.addToScore + ". Details:" +
 						adder.scoringDetails);
 			}
 		}
