@@ -11,8 +11,11 @@
 <form th:action="@{../j_spring_security_check}" method="post"
 							action="#" name="loginform">
 <div>
-	Screen Name <input type="text" name="username"/><br/>
-	Password <input type="password" name="password" />  
+<table>
+	<tr><td>Screen Name </td><td><input type="text" name="username"/></td></tr>
+	<tr><td>Password </td><td><input type="password" name="password" /></td></tr>
+	<tr><td>Remember Me?</td><td><input type="checkbox" name="remember-me" /></td></tr>
+</table>
 </div>
 <input type="submit" name="Login"/>
 </form>

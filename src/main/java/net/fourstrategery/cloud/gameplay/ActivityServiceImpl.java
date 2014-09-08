@@ -1,6 +1,7 @@
 package net.fourstrategery.cloud.gameplay;
 
 import net.fourstrategery.cloud.entity.ActivityEntity;
+import net.fourstrategery.cloud.entity.GameEntity;
 import net.fourstrategery.cloud.entity.UnitEntity;
 import net.fourstrategery.cloud.entity.VenueEntity;
 import net.fourstrategery.cloud.repository.ActivityRepository;
@@ -117,6 +118,14 @@ public class ActivityServiceImpl implements ActivityService {
 		activityPriv.setMessage(unit.getName() + " initial strength " + unit.getTroops() + " troops");
 		activityPriv.setSpecificAudience(unit.getPlayer());
 		activityRepository.save(activityPriv);
+	}
+
+	@Override
+	public void simpleGameActivity(GameEntity game, String action) {
+		ActivityEntity activity = new ActivityEntity();
+		activity.setGame(game);
+		activity.setMessage(action);
+		activityRepository.save(activity);
 	}
 	
 	

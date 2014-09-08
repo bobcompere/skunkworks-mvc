@@ -19,12 +19,14 @@
 	<tr>
 		<th class="table-main" colspan="3">Players</th>
 		<th class="table-main">Active Units</th>
+		<th class="table-main">Score</th>
 	</tr>
 	<tr th:each="player : ${gameModel.players}" class="table-main">
 		<td  th:class="'player_' + ${player.playerNumber}" th:text="${player.player.screenName}"></td>
 		<td  th:class="'player_' + ${player.playerNumber}" th:text="${player.player.firstName}"></td>
 		<td  th:class="'player_' + ${player.playerNumber}" th:text="${player.player.lastName}"></td>
 		<td  th:class="'player_' + ${player.playerNumber}" th:text="${player.activeUnitCount}"></td>
+		<td  th:class="'player_' + ${player.playerNumber}" th:text="${player.score}"></td>
 	</tr>
 </table>
 </td>

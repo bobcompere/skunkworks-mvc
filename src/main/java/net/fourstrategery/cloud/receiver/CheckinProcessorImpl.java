@@ -67,6 +67,9 @@ public class CheckinProcessorImpl implements CheckinProcessor {
 	@Autowired
 	MailService mailService;
 	
+	private static final int MAX_CHECKINS_PER_DAY =5;
+	private static final long MILLI_IN_A_DAY = 24 * 60 * 60 * 1000;
+	
 	@Override
 	@Transactional
 	public void processCheckin(Checkin checkinObj) throws Exception {
@@ -152,6 +155,19 @@ public class CheckinProcessorImpl implements CheckinProcessor {
 	
 	private void processGameCheckin(GameEntity game, PlayerEntity player, CheckinEntity checkin, VenueEntity venue ) {
 		//
+		//  make sure not over checkin limit
+		//
+		long milliNow = new Date().getTime();
+		milliNow -= MILLI_IN_A_DAY;
+		
+		Date last24Hours = new Date(milliNow);
+		
+		List<GameCheckinEntity> checkinsLast24 = gameCheckinRepository.getCheckinsSinceDateForGameAndPlayer(last24Hours, player, game);
+		if (checkinsLast24.size() >= MAX_CHECKINS_PER_DAY) {
+			activityService.simpleGameActivity(game, player.getScreenName() + " checked in a " + venue.getName() + " but player has reached the checkin limit so no game activity is generated");
+			return;
+		}
+		
 		//
 		//
 		int newTroops = determineCheckinValue(venue,player);
@@ -222,7 +238,7 @@ public class CheckinProcessorImpl implements CheckinProcessor {
 		mailInfo.setSubject("Game On! - your checkin at " + venue.getName() + " has been credited to game " + game.getDescription());
 		mailInfo.setMessageBody("Game: " + game.getDescription() + "\n" +
 				"Location: " + venue.getName() + " " + venue.getCity() + " " + venue.getState() + " " + venue.getCountry() + " \n" +
-				"Unit: " + unit.getName() + unitNote
+				"Unit: " + unit.getName() + unitNote + "\n " + (checkinsLast24.size() + 1) + " Checkins in the last 24 hours."
 				);
 		
 		mailService.sendMail(mailInfo);

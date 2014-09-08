@@ -1,5 +1,6 @@
 package net.fourstrategery.cloud.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -27,6 +28,9 @@ public class GamePlayerEntity extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "player_id")
 	private PlayerEntity player;
+	
+	@Column(name = "score")
+	private int score;
 	
 	@Transient
 	int playerNumber;
@@ -64,5 +68,13 @@ public class GamePlayerEntity extends BaseEntity {
 
 	public void setActiveUnitCount(int activeUnitCount) {
 		this.activeUnitCount = activeUnitCount;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
 	}
 }
