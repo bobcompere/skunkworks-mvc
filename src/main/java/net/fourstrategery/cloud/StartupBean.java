@@ -43,7 +43,7 @@ public class StartupBean implements ApplicationListener<ContextRefreshedEvent> {
 		 List<PlayerEntity> noPwPlayers = playerRepository.getPlayersWithoutPassword();
 		 
 		 for (PlayerEntity player : noPwPlayers) {
-			 player.setPassword(passwordEncoder.encode(player.getScreenName()));
+			 player.setPassword(passwordEncoder.encode("password"));
 			 playerRepository.save(player);
 		 }
 		 //
