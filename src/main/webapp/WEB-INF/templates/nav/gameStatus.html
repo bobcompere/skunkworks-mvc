@@ -9,6 +9,7 @@
 <body tiles:fragment="content">
 
 <a th:href="@{/nav/gameStatus.html?gameId=} + ${gameModel.game.id}"><h1 th:text="${gameModel.game.description}">GAME</h1></a>
+<h2 th:text="${gameModel.gameStatus}"></h2>
 
 <table>
 <tr>
@@ -51,7 +52,8 @@
 </td>
 </tr>
 </table>
-<h1>Make some moves?</h1>
+<h1 th:if="${gameModel.activeGame} == true">Make some moves?</h1>
+<h1 th:if="${gameModel.activeGame} == false">Your Unit Positions</h1>
 
 <table class="table-main">
 	<tr>
@@ -76,11 +78,21 @@
 		<td th:text="${unit.status}" class="table-main"></td>
 		<td th:text="${unit.location.name}" class="table-main"></td>
 		<td th:each="venue,venueCnt : ${gameModel.venues}"  th:class="'player_' + ${venue.currentUnitPlayerNumber}">
-			<div th:if="${venue.currentUnit} != null"  th:onclick="${unit.moveMethods[__${venueCnt.index}__]}">
-				<span th:text="${venue.currentUnit.name}"></span>
+			<div th:if="${gameModel.activeGame} == true">
+				<div th:if="${venue.currentUnit} != null"  th:onclick="${unit.moveMethods[__${venueCnt.index}__]}">
+					<span th:text="${venue.currentUnit.name}"></span>
+				</div>
+				<div th:if="${venue.currentUnit} == null" th:onclick="${unit.moveMethods[__${venueCnt.index}__]}">
+					<span>un-occupied</span>
+				</div>
 			</div>
-			<div th:if="${venue.currentUnit} == null" th:onclick="${unit.moveMethods[__${venueCnt.index}__]}">
-				<span>un-occupied</span>
+			<div th:if="${gameModel.activeGame} == false">
+				<div th:if="${venue.currentUnit} != null" >
+					<span th:text="${venue.currentUnit.name}"></span>
+				</div>
+				<div th:if="${venue.currentUnit} == null">
+					<span>un-occupied</span>
+				</div>
 			</div>
 		</td>
 	</tr>

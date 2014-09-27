@@ -1,3 +1,16 @@
+
+th {
+	font-weight: bolder;
+ 	background-color: #A9BCF5;
+ 	border-style: solid;
+ 	border-width: 1px;
+}
+
+td {
+	border-style: solid;
+ 	border-width: 1px;
+}
+
  .left-nav {
  	float:left;
  	 width:10%;

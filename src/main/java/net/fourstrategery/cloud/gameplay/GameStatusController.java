@@ -1,6 +1,7 @@
 package net.fourstrategery.cloud.gameplay;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import net.fourstrategery.cloud.entity.GameEntity;
@@ -60,6 +61,20 @@ public class GameStatusController {
 		
 		GameEntity game = gameRepository.findOne(gameId);
 		returnVal.setGame(game);
+		
+		Date now = new Date();
+		if (now.after(game.getEnds()) || now.before(game.getStarts())) {
+			returnVal.setActiveGame(false);
+			if (now.after(game.getEnds())) {
+				returnVal.setGameStatus("Completed Game");
+			} else {
+				returnVal.setGameStatus("Game Not Started Yet");
+			}
+		}
+		else {
+			returnVal.setActiveGame(true);
+			returnVal.setGameStatus("Active Game");
+		}
 		
 		returnVal.setActivities(activityRepository.getActivitiesForGameAndPlayer(game, player));
 		

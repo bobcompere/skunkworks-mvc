@@ -179,6 +179,35 @@ public class CheckinProcessorImpl implements CheckinProcessor {
 		UnitEntity unit = unitRepository.getUnitAtVenue(game,player,venue);
 		
 		if (unit == null) {
+			//
+			//  check to see if not 'yours' if occupied by another you get an 'intelligence report'
+			//
+			UnitEntity opponentAtLocation = unitRepository.getUnitOccupingVenue(game, venue);
+			if (opponentAtLocation != null) {
+				activityService.intelligenceReport(opponentAtLocation, player);
+				GameCheckinEntity gameCheckin = new GameCheckinEntity();
+				
+				gameCheckin.setGame(game);
+				gameCheckin.setPlayer(player);
+				gameCheckin.setCheckin(checkin);
+				gameCheckin.setTroopsEarned(0);
+				gameCheckinRepository.save(gameCheckin);
+				
+				MailInfo mailInfo = new MailInfo();
+							
+				mailInfo.setToAddresses(player.getEmailAddress());
+				mailInfo.setSubject("Game On! - your checkin at " + venue.getName() + " has been credited to game " + game.getDescription());
+				mailInfo.setMessageBody("Game: " + game.getDescription() + "\n" +
+						"The location you checked into is occupied by an opponent, you do not get troops but you do get an intelligence report\n" +
+						"Location: " + venue.getName() + " " + venue.getCity() + " " + venue.getState() + " " + venue.getCountry() + " \n" +
+						"Is occupied by Unit: " + opponentAtLocation.getName()  + " belonging to : " + opponentAtLocation.getPlayer().getScreenName() + ", Strength = "  +  opponentAtLocation.getTroops() + " \n " + 
+						(checkinsLast24.size() + 1) + " Checkins in the last 24 hours."
+						);
+				
+				mailService.sendMail(mailInfo);
+			}
+			//
+			//
 			existingUnit = false;
 			//
 			// no unit there, need to create one
@@ -194,6 +223,7 @@ public class CheckinProcessorImpl implements CheckinProcessor {
 			unit.setNextMoveTime(new Date());
 			
 		}
+		
 		unit.setTroops(unit.getTroops() + newTroops);
 		
 		unit = unitRepository.save(unit);

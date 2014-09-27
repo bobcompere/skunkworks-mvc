@@ -1,0 +1,179 @@
+<html>
+	<head>
+		<title>Four-Strategery</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Four-Strategery</title>
+
+		
+		<link href="css/main.css" rel="stylesheet" type="text/css"  />
+		<link href="css/jquery-ui-1.11.1.custom/jquery-ui.css" rel="stylesheet" type="text/css"  />
+		<script src="js/jquery-1.11.1.js"   type="text/javascript"></script>
+		<script src="css/jquery-ui-1.11.1.custom/jquery-ui.js"   type="text/javascript"></script>
+		 <link rel="icon" type="image/x-icon" th:src="images/favicon.ico" />
+		 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"/>
+	</head>
+	<body>
+	<div class="ui-widget-header" width="100%">
+		<a href="/cloud"><img src="images/4Strat.gif" height="150px"></img></a>
+		<img src="images/foursquare-logo.png" height="150px" align="right"></img>
+	</div>
+	<div class="stripe" width="100%">&nbsp;</div>
+	<div class="ui-widget-content">
+		<div class="ui-widget-header left-nav">
+				<a href="nav/home.html">Player Home </a><br/>
+				<a href="reg/registration.html">Registration</a><br/>
+				<hr/>
+				<a href="gamePlay.html">Game Play</a><br/>
+		</div>
+		<div class="ui-widget-content main-content">
+			<div>
+					<h1>Four-Strategery - Strategy Game for 4-Square Users</h1>
+					<h1>GAME PLAY</h1>
+					<h2>Step 1 - Registration</h2>
+					Use the 'Register' Link on the left side of the page to create a Four-strategery Profile
+					<h2>Step 2 - Create a Game</h2>
+					THIS FUNCTION IS COMMING SOON - currently you can only be added to games by administrators
+					<h2>Step 3 - Play</h2>
+					Once you are in a game there are basically 2 game activities:
+					<ol>
+						<li>Check into Venues via Four-square and Swarm - your checkins will trigger game events. See Four-square activity below</li>
+						<li>Use the four-stragerey interface to move Game units between game venues to gain advantage, fight battles, and score points</li>
+					</ol>
+					<p>Games have a specified start and end date.</p>
+					<h2>Foursquare Activity</h2>
+					<ul>
+						<li>When you checkin on Foursquare you will generate game activity for all active games you are a player in</li>
+						<li>You are limited to 5 game checkins per game per day. The game is run on US Eastern time so if you checkin 5 times in one day any subsequent checkins will not generate
+						 additional game activitys until midnight Eastern time when the count is reset for the next day.</li>
+						<li>Game checkins will generate one of the following game activities
+							<ul>
+								<li>If the venue a player checks into is unoccupied --- Then a new unit for the checking in player will be generated in that location. The unit will be named after the venue name. The initial 
+								troop strength will be based on the size of the venue (based on foursquare stats)</li>
+								<li>If the venue is already occupied by the player that is checking in -- Then that unit's troops will be increased. The new troop count is determined by the same rules as when the venue is not occupied</li>
+								<li>If the venue is already occupied by an opponent -- Then the checking in player receives no additional troops BUT they will receive an intelligence report which
+								will provide information on the unit at that location</li>
+							</ul>
+						</li>
+					</ul>
+					<h2>Four-Strategery Game Activity</h2>
+					<ul>
+						<li>To move your units in Four-Strategery come to this website (Mobile app comming!(?)).</li>
+						<li>Login with your creditials</li>
+						<li>Use the 'Player home' link to see a list of active games (and a list of past games)</li>
+						<li>Click the game name for the game you wish to view/make moves on - this will bring up the game status view</li>
+					</ul>
+				<h2>Game Activity View</h2>
+				The game activity view is divided into several sections
+				<table>
+					<theader>
+						<tr>
+							<th>Section Name</th><th>Content</th><th>Image</th>
+						</tr>
+					</theader>
+					<tbody>
+						<tr>
+							<td><h3>Player list</h3></td>
+							<td>Shows a list of players, displays the score and the number of units for each player</td>
+							<td><img alt="" src="images/player_list.png">
+						</tr>
+						<tr>
+							<td><h3>Game Activity</h3></td>
+							<td>This is a scrollable activity list which shows all game activity in reverse chronological order. Items shown in the reddish color
+							are private messages - just for you. Other items are public and are seen by all players.</td>
+							<td><img alt="" src="images/activity.png" ></td>
+						</tr>
+						<tr>
+							<td><h3>Your Units</h3></td>
+							<td>This section is a list of all of your current units. For each unit the list has:
+							<ul>
+								<li>Unit Name</li>
+								<li>Current Strength</li>
+								<li>Status, posible statuses are:
+									<ul>
+										<li>Garrisoned - means the unit in at rest in a venue</li>
+										<li>In Transit - means the unit has been sent to another venue and is on the wat</li>
+									</ul>
+								</li>
+								<li>Location, this is the location the unit is in OR where it is going</li>
+							</ul>
+							To the right of the unit status columns there is a column with each venue in the game. These columns indicated the current occupant of each venue.
+							<h3>To MOVE a UNIT: Click the cell for the venue you want to move to in that unit's row</h3>
+							</td>
+							<td><img alt="" src="images/your_units.png" >
+							</td>
+						</tr>
+						<tr>
+							<td><h3>Move Distances</h3></td>
+							<td>The move distances table simply shows the distances from all game venues to all others. This could be useful when planning your domination</td>
+							<td><img alt="" src="images/move_distances.png" ></td>					
+						</tr>
+					</tbody>
+				</table>
+				<h2>Moving Units</h2>
+				<ul>
+					<li>Units are moved by accessing the Game activity page for the game in question, this is done by selecting the game from the 'player home' page</li>
+					<li>To move a unit</li>
+						<ul>
+							<li>Find the row for the desired unit in the 'Your units' list</li>
+							<li>Click the column in that row for the venue you wish to move to</li>
+							<li>The game will calculate the transit time required and ask you to confirm</li>
+							<li>If you confirm the unit will start to move</li>
+						</ul>
+					<li>Once a unit is moving you cannot stop, re-route, or redirect it. It is gonna go there.</li>
+					<li>All units travel at 50 miles per hour</li>
+					<li>Units travel in straight lines, the most direct route, regardless of geography, roads, lakes, mountains, oceans, borders, etc</li>
+					<li>Units in transit cannot interact with any other units</li>
+					<li>Units in transit are not considered when scores are tabulated</li>
+					<li>If a unit arrives at a venue where that player has another unit then those units merge, the troops are added together and the new unit takes the name of the
+					larger of the two merged units. --- UNITS CANNOT BE UN-MERGED or split in any way.</li>
+					<li>If a unit arrives at a venue occupied by a unit belonging to another player, THEN a battle will ensue......</li>
+				</ul>
+				<h2>BATTLES</h2>
+				If a unit arrives at a venue that is occupied a battle will ensue. The rules for battles are as follows:
+				<ul>
+					<li>Battles end when one side or the other is annihilated - there are no tactical withdraws - more like thunderdome, one man leaves.</li>
+					<li>The battle process follows the classic board game 'risk' combat system</li>
+					<ul>
+						<li>The Attacker gets one six sided di per 'troop' with a max of 3</li>
+						<li>The Defender gets one six sided di per 'troop' with a max of 2</li>
+						<li>The dice are thrown and the top di for each side are paired for comparison.</li>
+						<li>The best number of the attacker is paired against the best di for the defender.</li>
+						<li>If both sides have at least 2 dice then their 2nd best values are likewise paired to each other.</li>
+						<li>The looser of each pairing of di looses a troop</li>
+						<li>If a pairing is a tie then the defender wins</li>
+						<li>This process is repeated until one side is ANNIHILATED</li>
+					</ul>
+					<il>The winner (what is left of them) will occupy the venue</il>
+					<il>The looser's only consolation prize is that they get an accurate intelligence report on the unit that defeated them</il>
+				</ul>
+				
+				<h2>Scoring</h2>
+				The scoring system is as follows:
+				<ul>
+					<li>Scoring happens once per day at midnight US Eastern time</li>
+					<li>Only Garrioned units participate in scoring, units in transit do not count</li>
+					<li>Unit size is irrelevent when it comes to scoring</li>
+					<li>Scoring works as follows</li>
+					<ul>
+						<li>All occupied venues are sorted by size (based on forsquare stats)</li>
+						<li>Each venue provides it's occupier with points based on it's size relative to the others</li>
+						<li>The occupier of the smallest venue gets 1 point for that venue</li>
+						<li>The occupier of the second smallest venue gets 2 points for that venue</li>
+						<li>The occupier of the third smallest venue gets 3 points for that venue</li>
+						<li>and so on...</li>
+					</ul>
+				</ul>
+				<h2>Winning the Game</h2>
+				Simple - player with the highest score when the game end date hits is the winner.
+			</div>
+		<div>
+		
+		</div>
+		<hr/>
+		<a href="privacy.html">Privacy Policy</a>
+			</div>
+		</div>
+	</div>
+		
+	</body>
+</html>

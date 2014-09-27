@@ -12,6 +12,8 @@ public class GameStatusModel {
 
 	private List<UnitEntity> myUnits;
 	private GameEntity game;
+	private boolean activeGame;
+	private String gameStatus;
 	private List<GameVenueEntity> venues;
 	private int venueCount;
 	private int myPlayerNumber;
@@ -72,6 +74,22 @@ public class GameStatusModel {
 
 	public void setActivities(List<ActivityEntity> activities) {
 		this.activities = activities;
+	}
+
+	public boolean isActiveGame() {
+		return activeGame;
+	}
+
+	public void setActiveGame(boolean activeGame) {
+		this.activeGame = activeGame;
+	}
+
+	public String getGameStatus() {
+		return gameStatus;
+	}
+
+	public void setGameStatus(String gameStatus) {
+		this.gameStatus = gameStatus;
 	}
 
 

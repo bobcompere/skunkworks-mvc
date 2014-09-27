@@ -2,6 +2,7 @@ package net.fourstrategery.cloud.gameplay;
 
 import net.fourstrategery.cloud.entity.ActivityEntity;
 import net.fourstrategery.cloud.entity.GameEntity;
+import net.fourstrategery.cloud.entity.PlayerEntity;
 import net.fourstrategery.cloud.entity.UnitEntity;
 import net.fourstrategery.cloud.entity.VenueEntity;
 import net.fourstrategery.cloud.repository.ActivityRepository;
@@ -125,6 +126,19 @@ public class ActivityServiceImpl implements ActivityService {
 		ActivityEntity activity = new ActivityEntity();
 		activity.setGame(game);
 		activity.setMessage(action);
+		activityRepository.save(activity);
+	}
+
+	@Override
+	public void intelligenceReport(UnitEntity observedUnit,
+			PlayerEntity observer) {
+			
+		ActivityEntity activity = new ActivityEntity();
+		activity.setGame(observedUnit.getGame());
+		activity.setMessage("Intelligence Report: Player: " + observedUnit.getPlayer().getScreenName() + " occupies " +
+				observedUnit.getLocation().getName() + " " + observedUnit.getLocation().getCity() + " " + 
+				observedUnit.getLocation().getState() + " with " + observedUnit.getName() + " strength = " + observedUnit.getTroops());
+		activity.setSpecificAudience(observer);
 		activityRepository.save(activity);
 	}
 	

@@ -27,6 +27,25 @@
 	</tr>
 </table>
 
+<h1>Past Games</h1>
+<table class="table-main">
+	<tr>
+		<th class="table-main">Game Name</th>
+		<th class="table-main">Game Start</th>
+		<th class="table-main">Game End</th>
+		<th class="table-main">Players</th>
+	</tr>
+	<tr th:if="${pastGames.empty}">
+		<td class="table-main">No past Games</td>
+	</tr>
+	<tr th:each="game : ${pastGames}">
+		<td class="table-main"><a th:text="${game.description}" th:href="@{/nav/gameStatus.html?gameId=} + ${game.id}"></a></td>
+		<td th:text="${game.starts}" class="table-main"></td>
+		<td th:text="${game.ends}" class="table-main"></td>
+		<td th:text="${game.players.size()}" class="table-main"></td>
+	</tr>
+</table>
+
 
 </body>
 </html>

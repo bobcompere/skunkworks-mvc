@@ -46,8 +46,10 @@ public class HomeController {
 		PlayerUserDetails pud = (PlayerUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		List<GameEntity> activeGames = gameRepository.findActiveGamesForPlayer(pud.getPlayer() , new Date());
+		List<GameEntity> pastGames = gameRepository.findLast10GamesForPlayer(pud.getPlayer() , new Date());
 		
 		model.addAttribute("games",activeGames);
+		model.addAttribute("pastGames",pastGames);
 		
 		return "nav/home";
 	}
