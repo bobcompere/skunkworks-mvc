@@ -205,6 +205,7 @@ public class CheckinProcessorImpl implements CheckinProcessor {
 						);
 				
 				mailService.sendMail(mailInfo);
+				return;
 			}
 			//
 			//

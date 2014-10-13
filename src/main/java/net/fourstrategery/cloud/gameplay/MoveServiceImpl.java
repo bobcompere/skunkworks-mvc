@@ -83,7 +83,7 @@ public class MoveServiceImpl implements MoveService {
 	@Transactional
 	@Scheduled(fixedDelay = MOVE_DELAY)
 	public void processCompletedMoves() {
-		List<UnitEntity> unitsToMove = unitRepository.getUnitsThatHaveArrived();
+		List<UnitEntity> unitsToMove = unitRepository.getUnitsThatHaveArrived(new Date());
 		
 		for (UnitEntity unit : unitsToMove) {
 			completeMove(unit);

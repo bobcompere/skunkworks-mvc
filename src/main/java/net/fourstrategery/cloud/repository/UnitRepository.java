@@ -1,5 +1,6 @@
 package net.fourstrategery.cloud.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import net.fourstrategery.cloud.entity.GameEntity;
@@ -27,8 +28,8 @@ public interface UnitRepository extends JpaRepository<UnitEntity, Integer> {
 			+ "net.fourstrategery.cloud.entity.UnitStatus.INTRANSIT) and u.game.id = ?1")
 	public List<UnitEntity> getCurrentUnitsForGame(int game_id);
 	
-	@Query("Select u from UnitEntity u where u.status = net.fourstrategery.cloud.entity.UnitStatus.INTRANSIT and u.nextMoveTime < CURRENT_TIMESTAMP order by u.nextMoveTime")
-	public List<UnitEntity> getUnitsThatHaveArrived();
+	@Query("Select u from UnitEntity u where u.status = net.fourstrategery.cloud.entity.UnitStatus.INTRANSIT and u.nextMoveTime < ?1 order by u.nextMoveTime")
+	public List<UnitEntity> getUnitsThatHaveArrived(Date now);
 	
 	@Query("Select u from UnitEntity u where u.status =  net.fourstrategery.cloud.entity.UnitStatus.GARRISONED and u.game = ?1 and u.location=?2")
 	public UnitEntity getUnitOccupingVenue(GameEntity game, VenueEntity venue);
