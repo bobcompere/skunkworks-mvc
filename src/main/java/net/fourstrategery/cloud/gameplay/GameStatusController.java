@@ -48,91 +48,20 @@ public class GameStatusController {
 	
 	@Autowired
 	ActivityRepository activityRepository;
+	
+	@Autowired 
+	GameStatusModelService gameStatusModelService;
 
 	@ModelAttribute("gameModel")
 	GameStatusModel getModel(@RequestParam int gameId) {
-		GameStatusModel returnVal = new GameStatusModel();
+		
 		
 		PlayerUserDetails pud = (PlayerUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		PlayerEntity player = pud.getPlayer();
-		returnVal.setMyUnits(unitRepository.getCurrentUnitsForPlayerAndGame(player.getId(), gameId));
-		
-		List<UnitEntity> gameUnits = unitRepository.getCurrentUnitsForGame(gameId);
-		
 		GameEntity game = gameRepository.findOne(gameId);
-		returnVal.setGame(game);
 		
-		Date now = new Date();
-		if (now.after(game.getEnds()) || now.before(game.getStarts())) {
-			returnVal.setActiveGame(false);
-			if (now.after(game.getEnds())) {
-				returnVal.setGameStatus("Completed Game");
-			} else {
-				returnVal.setGameStatus("Game Not Started Yet");
-			}
-		}
-		else {
-			returnVal.setActiveGame(true);
-			returnVal.setGameStatus("Active Game");
-		}
+		return gameStatusModelService.getGameStatusModel(game, player);
 		
-		returnVal.setActivities(activityRepository.getActivitiesForGameAndPlayer(game, player));
-		
-		List<GamePlayerEntity> players = gamePlayerRepository.getPlayersForGame(game);
-		
-		returnVal.setPlayers(players);
-		
-		int playerNum = 1;
-		for (GamePlayerEntity playerX : players) {
-			playerX.setPlayerNumber(playerNum);
-			if (playerX.getPlayer().getId() == player.getId()) {
-				returnVal.setMyPlayerNumber(playerNum);
-			}
-			playerNum++;
-		}
-		
-		List<GameVenueEntity> venues = gameVenueReposity.getVenuesForGame(game);
-		returnVal.setVenues(venues);
-		
-		returnVal.setVenueCount(venues.size());
-				
-		for (int i1=0;i1<venues.size();i1++) {
-			List<Integer> dists = new ArrayList<Integer>();
-			for (int i2 = 0;i2<venues.size();i2++) {
-				dists.add(VenueUtility.distanceBetween(venues.get(i1).getVenue(), venues.get(i2).getVenue()));
-			}
-			venues.get(i1).setDistances(dists);
-			
-			for (UnitEntity unit : gameUnits) {
-				if (VenueUtility.isInVenue(unit, venues.get(i1).getVenue())) {
-					venues.get(i1).setCurrentUnit(unit);
-					
-					playerNum = 1;
-					for (GamePlayerEntity playerX : players) {
-						if (playerX.getPlayer().getId() == unit.getPlayer().getId()) {
-							venues.get(i1).setCurrentUnitPlayerNumber(playerNum);
-							playerX.setActiveUnitCount(playerX.getActiveUnitCount() + 1);
-							break;
-						}
-						playerNum++;
-					}
-					
-					
-					break;
-				}
-			}
-		}
-		
-		for (UnitEntity unit : returnVal.getMyUnits()) {
-			List<String> moves = new ArrayList<String>();
-			for (GameVenueEntity gameVenue : venues) {
-				moves.add(VenueUtility.getMoveMethod(unit, gameVenue.getCurrentUnit(), gameVenue.getVenue()));
-			}
-			unit.setMoveMethods(moves);
-		}
-		
-			
-		return returnVal;
 	}
 	
 	@RequestMapping(value = "nav/gameStatus",  method = RequestMethod.GET)
