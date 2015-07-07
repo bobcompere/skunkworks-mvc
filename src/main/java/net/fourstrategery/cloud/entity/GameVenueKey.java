@@ -20,5 +20,18 @@ public class GameVenueKey implements Serializable{
 	public void setVenue(VenueEntity venue) {
 		this.venue = venue;
 	}
+	@Override
+	public int hashCode() {
+		return game.getId() + venue.getId().hashCode() * 100000; // should be safe for 100,000 games
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof GameVenueKey)) {
+			throw new IllegalArgumentException("Cannot compare a " + obj.getClass().getName() + " to a " + this.getClass().getName());
+		}
+		return (obj.hashCode() == this.hashCode());
+	}
+	
+	
 	
 }

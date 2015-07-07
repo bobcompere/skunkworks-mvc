@@ -43,7 +43,7 @@ public class PlayerEntity extends BaseEntity implements Serializable {
 	private Date lastActivity;
 	
 	@Column(name = "password")
-	public String password;
+	private String password;
 
 	
 	public String getFourSquareId() {

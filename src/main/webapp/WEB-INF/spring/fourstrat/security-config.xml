@@ -18,6 +18,7 @@
     <intercept-url pattern="/pos/**" access="permitAll" />
 
     <intercept-url pattern="/auth/**" access="permitAll" />
+     <intercept-url pattern="/service/mobile/**" access="permitAll" />
     <intercept-url pattern="/registration/**" access="permitAll" />
      <intercept-url pattern="/receiver/**" access="permitAll" />
      <intercept-url pattern="/*" access="permitAll" />
