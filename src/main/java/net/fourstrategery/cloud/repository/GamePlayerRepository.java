@@ -13,4 +13,7 @@ public interface GamePlayerRepository extends JpaRepository<GamePlayerEntity, Ga
 
 	@Query("select gp from GamePlayerEntity gp where gp.game = ?1 order by gp.score desc,gp.createdOn")
 	List<GamePlayerEntity> getPlayersForGame(GameEntity game);
+	
+	@Query("select gp from GamePlayerEntity gp where gp.game.finish_email_sent is null order by gp.player,gp.game")
+	List<GamePlayerEntity> getGamePlayersInActiveGames();
 }

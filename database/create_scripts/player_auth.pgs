@@ -1,0 +1,12 @@
+create table player_auth (
+	id serial,
+	player_id int,
+	authorization_token varchar(20),
+	created_on timestamp,
+	modified_on timestamp,
+	primary key ("id")
+);
+
+
+
+grant all on player_auth to cloudapp;

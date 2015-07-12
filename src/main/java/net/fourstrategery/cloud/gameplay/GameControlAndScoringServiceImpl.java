@@ -37,6 +37,9 @@ public class GameControlAndScoringServiceImpl implements
 	@Autowired
 	private ActivityService activityService;
 	
+	@Autowired
+	private GameAnnouncementsService announcementsService;
+	
 	private static final long MILLI_IN_A_DAY = 24 * 60 * 60 * 1000;
 	
 	@Override
@@ -55,6 +58,9 @@ public class GameControlAndScoringServiceImpl implements
 		for (GameEntity game : gamesActiveYesterday) {
 			tabulateScores(game);
 		}
+		
+		announcementsService.sendFinishGameEmails();
+		announcementsService.sendDailyGameStatusEmails();
 	}
 
 

@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 @Primary
 @Component("playerAuthDetailService")
-public class PlayerAuthDetalService implements UserDetailsService {
+public class PlayerAuthDetailService implements UserDetailsService {
 
 	public static final String ROLE_BASE_USER = "ROLE_BaseUser";
 	@Autowired

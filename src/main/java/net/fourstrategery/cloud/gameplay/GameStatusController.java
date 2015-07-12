@@ -15,7 +15,7 @@ import net.fourstrategery.cloud.repository.GamePlayerRepository;
 import net.fourstrategery.cloud.repository.GameRepository;
 import net.fourstrategery.cloud.repository.GameVenueRepository;
 import net.fourstrategery.cloud.repository.UnitRepository;
-import net.fourstrategery.cloud.security.PlayerAuthDetalService;
+import net.fourstrategery.cloud.security.PlayerAuthDetailService;
 import net.fourstrategery.cloud.security.PlayerUserDetails;
 import net.fourstrategery.cloud.utility.VenueUtility;
 
@@ -44,7 +44,7 @@ public class GameStatusController {
 	GamePlayerRepository gamePlayerRepository;
 	
 	@Autowired
-	PlayerAuthDetalService playerAuthDetalService;
+	PlayerAuthDetailService playerAuthDetalService;
 	
 	@Autowired
 	ActivityRepository activityRepository;

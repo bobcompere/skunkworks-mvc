@@ -8,6 +8,7 @@ public class MailInfo {
 	private String bccAddresses;
 	private String subject;
 	private String messageBody;
+	private boolean html;
 	
 	public String getToAddresses() {
 		return toAddresses;
@@ -45,4 +46,11 @@ public class MailInfo {
 	public void setMessageBody(String messageBody) {
 		this.messageBody = messageBody;
 	}
+	public boolean isHtml() {
+		return html;
+	}
+	public void setHtml(boolean html) {
+		this.html = html;
+	}
+
 }

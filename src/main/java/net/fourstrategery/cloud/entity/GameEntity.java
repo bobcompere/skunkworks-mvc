@@ -47,6 +47,9 @@ public class GameEntity extends BaseEntity {
 	@JoinColumn(name = "game_id")
 	List<GamePlayerEntity> players;
 
+	@Column(name = "finish_email_sent")
+	private Date finish_email_sent;
+	
 	public int getId() {
 		return id;
 	}
@@ -97,6 +100,14 @@ public class GameEntity extends BaseEntity {
 
 	public void setPlayers(List<GamePlayerEntity> players) {
 		this.players = players;
+	}
+
+	public Date getFinish_email_sent() {
+		return finish_email_sent;
+	}
+
+	public void setFinish_email_sent(Date finish_email_sent) {
+		this.finish_email_sent = finish_email_sent;
 	}
 
 
