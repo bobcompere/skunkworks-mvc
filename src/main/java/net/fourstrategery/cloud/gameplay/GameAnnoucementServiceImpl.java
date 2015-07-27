@@ -95,6 +95,8 @@ public class GameAnnoucementServiceImpl implements GameAnnouncementsService {
 					+ "<td>" + gp.getScore() + "</td></tr>");
 		}
 		html.append("</table><br/>");
+		html.append("<br/>");
+		html.append("<a href=\"http://services-fourstrategery.rhcloud.com/cloud\">Four Strategery Web Site</a>");
 	}
 
 }

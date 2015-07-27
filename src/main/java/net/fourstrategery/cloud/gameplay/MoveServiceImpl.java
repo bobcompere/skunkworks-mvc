@@ -171,7 +171,7 @@ public class MoveServiceImpl implements MoveService {
 				unit.setTroops(unit.getTroops() -1);
 			}
 			
-			if (defenseDice.length == 2) {
+			if (defenseDice.length == 2 && attackDice.length > 1) {
 				if (attackDice[1] > defenseDice[1]) {
 					occupingUnit.setTroops(occupingUnit.getTroops() -1);
 				}

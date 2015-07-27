@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.appengine.api.search.query.QueryParser.restrict_return;
+
 import net.fourstrategery.cloud.entity.GameEntity;
 import net.fourstrategery.cloud.entity.PlayerEntity;
+import net.fourstrategery.cloud.gameplay.GameStatusModelService;
 import net.fourstrategery.cloud.repository.GameRepository;
 import net.fourstrategery.cloud.repository.PlayerAuthRepository;
 
@@ -26,6 +29,9 @@ public class GameServicesController {
 	
 	@Autowired
 	private PlayerAuthRepository playerAuthRepository;
+	
+	@Autowired
+	private GameStatusModelService gameStatusModelService;
 	
 	@ModelAttribute("player")
 	private PlayerEntity getPlayer(@RequestParam int playerId, @RequestParam String authToken) {
@@ -62,5 +68,20 @@ public class GameServicesController {
 		}
 		
 		return list;
+	}
+	
+	
+	@RequestMapping(value = "/service/mobile/gameinfo",  method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public GameStatusResult gameInfo(ModelMap model,  @RequestParam int status) {
+		PlayerEntity player = (PlayerEntity)model.get("player");
+		GameEntity game = null;
+		GameStatusResult returnValue = new GameStatusResult();
+		if (player == null) {
+			returnValue.setMessage("INVALID CREDENTIALS");
+		} else {
+			returnValue.setGameStatusModel(gameStatusModelService.getGameStatusModel(game, player));
+		}
+		return returnValue;
 	}
 }

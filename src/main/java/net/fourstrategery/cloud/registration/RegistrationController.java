@@ -58,9 +58,21 @@ public class RegistrationController {
 			player.setEmailAddress(user.getContact().getEmail());
 			player.setLastName(user.getLastName());
 			player.setFirstName(user.getFirstName());
-			player.setFourSquareId(user.getId());
+			player.setFourSquareId(user.getFirstName());
 			player.setScreenName(user.getId());
+			
+			PlayerEntity existingPlayer = playerRepository.getPlayerByScreenName(player.getScreenName());
+			if (existingPlayer != null) {
+				int counter = 1;
+				while(true) {
+					player.setScreenName(user.getId() + counter);
+					existingPlayer = playerRepository.getPlayerByScreenName(player.getScreenName());
+					if (existingPlayer == null) break;
+				}
+			}
+			
 			player = playerRepository.save(player);
+			player.setPassword("password");
 			
 			model.addAttribute("user", player);
 			

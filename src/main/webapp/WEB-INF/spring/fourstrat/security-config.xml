@@ -19,7 +19,7 @@
 
     <intercept-url pattern="/auth/**" access="permitAll" />
      <intercept-url pattern="/service/mobile/**" access="permitAll" />
-    <intercept-url pattern="/registration/**" access="permitAll" />
+    <intercept-url pattern="/reg/**" access="permitAll" />
      <intercept-url pattern="/receiver/**" access="permitAll" />
      <intercept-url pattern="/*" access="permitAll" />
     <intercept-url pattern="/**" access="hasRole('ROLE_BaseUser')" />
