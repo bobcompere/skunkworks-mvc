@@ -3,6 +3,7 @@ package net.fourstrategery.cloud.profile;
 import javax.persistence.Column;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.hibernate.validator.constraints.Length;
 
 import net.fourstrategery.cloud.entity.PlayerEntity;
 
@@ -10,6 +11,7 @@ public class PlayerEditModel {
 	
 	private int id;
 
+	@Length(min = 3)
 	private String screenName;
 	
 	private String firstName;
@@ -18,6 +20,7 @@ public class PlayerEditModel {
 	
 	private String emailAddress;
 	
+	@Length(min = 6)
 	private String passwordChange1;
 	
 	private String passwordChange2;
