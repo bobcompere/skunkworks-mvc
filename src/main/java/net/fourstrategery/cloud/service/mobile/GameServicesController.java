@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.appengine.api.search.query.QueryParser.restrict_return;
-
 import net.fourstrategery.cloud.entity.GameEntity;
+import net.fourstrategery.cloud.entity.GamePlayerEntity;
+import net.fourstrategery.cloud.entity.GamePlayerKey;
 import net.fourstrategery.cloud.entity.PlayerEntity;
+import net.fourstrategery.cloud.entity.meta.GameStatusModel;
 import net.fourstrategery.cloud.gameplay.GameStatusModelService;
+import net.fourstrategery.cloud.repository.GamePlayerRepository;
 import net.fourstrategery.cloud.repository.GameRepository;
 import net.fourstrategery.cloud.repository.PlayerAuthRepository;
 
@@ -26,6 +28,9 @@ public class GameServicesController {
 	
 	@Autowired
 	private GameRepository gameRepository;
+	
+	@Autowired
+	private GamePlayerRepository gamePlayerRepository;
 	
 	@Autowired
 	private PlayerAuthRepository playerAuthRepository;
@@ -73,14 +78,33 @@ public class GameServicesController {
 	
 	@RequestMapping(value = "/service/mobile/gameinfo",  method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public GameStatusResult gameInfo(ModelMap model,  @RequestParam int status) {
-		PlayerEntity player = (PlayerEntity)model.get("player");
-		GameEntity game = null;
+	public GameStatusResult gameInfo(ModelMap model,  @RequestParam int gameId) {
 		GameStatusResult returnValue = new GameStatusResult();
-		if (player == null) {
-			returnValue.setMessage("INVALID CREDENTIALS");
-		} else {
-			returnValue.setGameStatusModel(gameStatusModelService.getGameStatusModel(game, player));
+
+		PlayerEntity player = (PlayerEntity)model.get("player");
+		
+		GameEntity game = gameRepository.findOne(gameId);
+		if (game == null) {
+			returnValue.setMessage("Invalid Game");
+		}
+		else {
+			if (player == null) {
+				returnValue.setMessage("INVALID CREDENTIALS");
+			} else {
+				GamePlayerKey gpk = new GamePlayerKey();
+				gpk.setGame(game);
+				gpk.setPlayer(player);
+				GamePlayerEntity gpe = gamePlayerRepository.findOne(gpk);
+				if (gpe == null) {
+					returnValue.setMessage("Invalid Player for Game");
+				} else {
+					GameStatusModel mod = gameStatusModelService.getGameStatusModel(game, player);
+					if (mod != null) {
+						returnValue.setGameStatusModel(mod);
+						returnValue.setSuccess(true);
+					}
+				}
+			}
 		}
 		return returnValue;
 	}
