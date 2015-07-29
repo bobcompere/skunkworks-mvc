@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "game")
@@ -32,7 +32,7 @@ public class GameEntity extends BaseEntity {
 	@Column(name = "description")
 	private String description;
 	
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "created_by")
 	private PlayerEntity createdBy;
@@ -45,6 +45,7 @@ public class GameEntity extends BaseEntity {
 	
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "game_id")
+	@JsonIgnore
 	List<GamePlayerEntity> players;
 
 	@Column(name = "finish_email_sent")
