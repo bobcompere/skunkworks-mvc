@@ -46,7 +46,7 @@ public class UnitEntity extends BaseEntity {
 	@JoinColumn(name = "game_id")
 	private GameEntity game;
 	
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "player_id")
 	private PlayerEntity player;
@@ -54,6 +54,7 @@ public class UnitEntity extends BaseEntity {
 	@Column(name = "next_move_time")
 	private Date nextMoveTime;
 	
+	@JsonIgnore
 	@Transient
 	private List<String> moveMethods;
 

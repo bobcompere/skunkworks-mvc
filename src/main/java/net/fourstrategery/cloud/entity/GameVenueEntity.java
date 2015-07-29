@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "game_venues_view")
 @IdClass(GameVenueKey.class)
@@ -19,10 +21,12 @@ public class GameVenueEntity {
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "game_id")
+	@JsonIgnore
 	private GameEntity game;
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "venue_id")
+	@JsonIgnore
 	private VenueEntity venue;
 	
 	private String name;
