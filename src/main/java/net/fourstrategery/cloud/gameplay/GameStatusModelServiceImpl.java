@@ -69,7 +69,7 @@ public class GameStatusModelServiceImpl implements GameStatusModelService {
 		int playerNum = 1;
 		for (GamePlayerEntity playerX : players) {
 			playerX.setPlayerNumber(playerNum);
-			playerDetails.add(playerX.getPlayer());
+			playerDetails.add((PlayerEntity)playerX.getPlayer().clone());
 			playerX.setPlayerId(playerX.getPlayer().getId());
 			if (playerX.getPlayer().getId() == player.getId()) {
 				returnVal.setMyPlayerNumber(playerNum);

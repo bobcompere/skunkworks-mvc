@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="player")
-public class PlayerEntity extends BaseEntity implements Serializable {
+public class PlayerEntity extends BaseEntity implements Serializable,Cloneable {
 	/**
 	 * 
 	 */
@@ -127,5 +127,14 @@ public class PlayerEntity extends BaseEntity implements Serializable {
 		this.password = password;
 	}
 	
-	
+	public Object clone() {
+		try {
+			return super.clone();
+		}
+		catch (CloneNotSupportedException cnse) {
+			// should not happen
+			cnse.printStackTrace();
+		}
+		return null;
+	}
 }
