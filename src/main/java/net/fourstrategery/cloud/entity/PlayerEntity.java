@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="player")
 public class PlayerEntity extends BaseEntity implements Serializable {
@@ -42,6 +44,7 @@ public class PlayerEntity extends BaseEntity implements Serializable {
 	@Column(name = "last_activity")
 	private Date lastActivity;
 	
+	@JsonIgnore
 	@Column(name = "password")
 	private String password;
 

@@ -35,7 +35,6 @@ public class UnitEntity extends BaseEntity {
 	
 	@Column(name = "troops")
 	private int troops;
-	
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "location_id")
@@ -57,6 +56,9 @@ public class UnitEntity extends BaseEntity {
 	@JsonIgnore
 	@Transient
 	private List<String> moveMethods;
+	
+	@Transient 
+	private String venueId;
 
 	public Integer getId() {
 		return id;
@@ -129,6 +131,14 @@ public class UnitEntity extends BaseEntity {
 
 	public void setMoveMethods(List<String> moveMethods) {
 		this.moveMethods = moveMethods;
+	}
+
+	public String getVenueId() {
+		return venueId;
+	}
+
+	public void setVenueId(String venueId) {
+		this.venueId = venueId;
 	}
 	
 	

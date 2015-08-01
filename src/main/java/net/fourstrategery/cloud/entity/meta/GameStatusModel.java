@@ -6,6 +6,7 @@ import net.fourstrategery.cloud.entity.ActivityEntity;
 import net.fourstrategery.cloud.entity.GameEntity;
 import net.fourstrategery.cloud.entity.GamePlayerEntity;
 import net.fourstrategery.cloud.entity.GameVenueEntity;
+import net.fourstrategery.cloud.entity.PlayerEntity;
 import net.fourstrategery.cloud.entity.UnitEntity;
 
 public class GameStatusModel {
@@ -18,6 +19,7 @@ public class GameStatusModel {
 	private int venueCount;
 	private int myPlayerNumber;
 	private List<GamePlayerEntity> players;
+	private List<PlayerEntity> playerDetails;
 	private List<ActivityEntity> activities;
 
 	public List<UnitEntity> getMyUnits() {
@@ -90,6 +92,14 @@ public class GameStatusModel {
 
 	public void setGameStatus(String gameStatus) {
 		this.gameStatus = gameStatus;
+	}
+
+	public List<PlayerEntity> getPlayerDetails() {
+		return playerDetails;
+	}
+
+	public void setPlayerDetails(List<PlayerEntity> playerDetails) {
+		this.playerDetails = playerDetails;
 	}
 
 

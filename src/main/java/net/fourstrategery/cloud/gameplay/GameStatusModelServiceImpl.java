@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import net.fourstrategery.cloud.entity.GameEntity;
 import net.fourstrategery.cloud.entity.GamePlayerEntity;
 import net.fourstrategery.cloud.entity.GameVenueEntity;
@@ -15,9 +18,6 @@ import net.fourstrategery.cloud.repository.GamePlayerRepository;
 import net.fourstrategery.cloud.repository.GameVenueRepository;
 import net.fourstrategery.cloud.repository.UnitRepository;
 import net.fourstrategery.cloud.utility.VenueUtility;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class GameStatusModelServiceImpl implements GameStatusModelService {
@@ -63,9 +63,14 @@ public class GameStatusModelServiceImpl implements GameStatusModelService {
 		
 		returnVal.setPlayers(players);
 		
+		List<PlayerEntity> playerDetails = new ArrayList<PlayerEntity>();
+		returnVal.setPlayerDetails(playerDetails);
+		
 		int playerNum = 1;
 		for (GamePlayerEntity playerX : players) {
 			playerX.setPlayerNumber(playerNum);
+			playerDetails.add(playerX.getPlayer());
+			playerX.setPlayerId(playerX.getPlayer().getId());
 			if (playerX.getPlayer().getId() == player.getId()) {
 				returnVal.setMyPlayerNumber(playerNum);
 			}
@@ -110,6 +115,7 @@ public class GameStatusModelServiceImpl implements GameStatusModelService {
 				moves.add(VenueUtility.getMoveMethod(unit, gameVenue.getCurrentUnit(), gameVenue.getVenue()));
 			}
 			unit.setMoveMethods(moves);
+			unit.setVenueId(unit.getLocation().getId());
 		}
 		
 			
