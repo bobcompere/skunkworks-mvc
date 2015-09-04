@@ -6,6 +6,7 @@ public class GameStatusResult {
 
 	private boolean success;
 	private String message;
+	private String moveMessage;
 	private GameStatusModel gameStatusModel;
 	public boolean isSuccess() {
 		return success;
@@ -24,6 +25,12 @@ public class GameStatusResult {
 	}
 	public void setGameStatusModel(GameStatusModel gameStatusModel) {
 		this.gameStatusModel = gameStatusModel;
+	}
+	public String getMoveMessage() {
+		return moveMessage;
+	}
+	public void setMoveMessage(String moveMessage) {
+		this.moveMessage = moveMessage;
 	}
 	
 	

@@ -7,8 +7,13 @@ import net.fourstrategery.cloud.entity.VenueEntity;
 
 public interface MoveService {
 
-	public String moveUnit(PlayerEntity player, int unitId, String venueId);
-	
+	/**
+	 * @param player player object that owns the unit
+	 * @param unitId id of unit to move
+	 * @param venueId Venue to move to
+	 * @return message indicating results
+	 */
+	public String moveUnit(PlayerEntity player, int unitId, String venueId); 
 	public void processCompletedMoves();
 	
 	

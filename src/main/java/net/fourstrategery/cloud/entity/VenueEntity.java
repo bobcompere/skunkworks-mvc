@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 @Entity
@@ -49,6 +50,7 @@ public class VenueEntity extends BaseEntity {
 	
 	@Column(name = "latitude")
 	private BigDecimal latitude;
+	
 
 	public String getId() {
 		return id;
@@ -145,6 +147,7 @@ public class VenueEntity extends BaseEntity {
 	public void setLatitude(BigDecimal latitude) {
 		this.latitude = latitude;
 	}
-	
+
+
 	
 }

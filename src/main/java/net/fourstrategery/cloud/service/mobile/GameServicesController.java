@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,6 +21,7 @@ import net.fourstrategery.cloud.entity.GamePlayerKey;
 import net.fourstrategery.cloud.entity.PlayerEntity;
 import net.fourstrategery.cloud.entity.meta.GameStatusModel;
 import net.fourstrategery.cloud.gameplay.GameStatusModelService;
+import net.fourstrategery.cloud.gameplay.MoveService;
 import net.fourstrategery.cloud.repository.GamePlayerRepository;
 import net.fourstrategery.cloud.repository.GameRepository;
 import net.fourstrategery.cloud.repository.PlayerAuthRepository;
@@ -37,6 +40,11 @@ public class GameServicesController {
 	
 	@Autowired
 	private GameStatusModelService gameStatusModelService;
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	@Autowired
+	private MoveService moveService;
 	
 	@ModelAttribute("player")
 	private PlayerEntity getPlayer(@RequestParam int playerId, @RequestParam String authToken) {
@@ -78,7 +86,8 @@ public class GameServicesController {
 	
 	@RequestMapping(value = "/service/mobile/gameinfo",  method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public GameStatusResult gameInfo(ModelMap model,  @RequestParam int gameId) {
+	public GameStatusResult gameInfo(ModelMap model,  @RequestParam int gameId,
+			@RequestParam(required = false) Integer moveUnitId, @RequestParam(required = false) String venue) {
 		GameStatusResult returnValue = new GameStatusResult();
 
 		PlayerEntity player = (PlayerEntity)model.get("player");
@@ -98,9 +107,18 @@ public class GameServicesController {
 				if (gpe == null) {
 					returnValue.setMessage("Invalid Player for Game");
 				} else {
+					// 
+					// if doing a move, do that first
+					//
+					String moveMess = null;
+					logger.debug("Move? " + moveUnitId + " " + venue);
+					if (moveUnitId != null && moveUnitId.intValue() != 0 && venue != null) {
+						moveMess = moveService.moveUnit(player,moveUnitId, venue);
+					}
 					GameStatusModel mod = gameStatusModelService.getGameStatusModel(game, player);
 					if (mod != null) {
 						returnValue.setGameStatusModel(mod);
+						returnValue.setMoveMessage(moveMess);
 						returnValue.setSuccess(true);
 					}
 				}

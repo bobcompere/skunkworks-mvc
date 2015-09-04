@@ -42,6 +42,9 @@ public class GameVenueEntity {
 	@Transient
 	private int currentUnitPlayerNumber;
 	
+	@Transient
+	private String id;
+	
 	public GameEntity getGame() {
 		return game;
 	}
@@ -89,6 +92,12 @@ public class GameVenueEntity {
 	}
 	public void setCurrentUnitPlayerNumber(int currentUnitPlayerNumber) {
 		this.currentUnitPlayerNumber = currentUnitPlayerNumber;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	

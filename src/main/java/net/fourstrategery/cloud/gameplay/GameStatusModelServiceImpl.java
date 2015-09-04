@@ -83,6 +83,7 @@ public class GameStatusModelServiceImpl implements GameStatusModelService {
 		returnVal.setVenueCount(venues.size());
 				
 		for (int i1=0;i1<venues.size();i1++) {
+			venues.get(i1).setId(venues.get(i1).getVenue().getId());
 			List<Integer> dists = new ArrayList<Integer>();
 			for (int i2 = 0;i2<venues.size();i2++) {
 				dists.add(VenueUtility.distanceBetween(venues.get(i1).getVenue(), venues.get(i2).getVenue()));
